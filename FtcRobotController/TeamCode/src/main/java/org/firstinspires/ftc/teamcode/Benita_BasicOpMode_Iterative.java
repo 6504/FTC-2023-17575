@@ -54,9 +54,8 @@ import com.qualcomm.robotcore.util.Range;
  * Station OpMode list
  */
 
-@TeleOp(name = "Basic: Iterative OpMode", group = "Iterative Opmode")
-@Disabled
-public class BasicOpMode_Iterative extends OpMode {
+@TeleOp(name = "Basic: Benita OpMode", group = "Benita Opmode")
+public class Benita_BasicOpMode_Iterative extends OpMode {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftDrive = null;

@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.robotcontroller.external.samples;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -50,7 +50,7 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Basic: Linear OpMode", group="Linear Opmode")
+@TeleOp(name="Basic: Linear OpMode2", group="Linear Opmode")
 public class SimpleDriving_BasicOpMode_Linear extends LinearOpMode {
 
     // Declare OpMode members.
@@ -108,8 +108,12 @@ public class SimpleDriving_BasicOpMode_Linear extends LinearOpMode {
             // rightPower = -gamepad1.right_stick_y ;
 
             // Send calculated power to wheels
-            leftDrive.setPower(leftPower);
-            rightDrive.setPower(rightPower);
+            // leftDrive.setPower(leftPower);
+            // rightDrive.setPower(rightPower);
+            backLeft.setPower(leftPower);
+            frontLeft.setPower(leftPower);
+            backRight.setPower(rightPower);
+            frontRight.setPower(rightPower);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
