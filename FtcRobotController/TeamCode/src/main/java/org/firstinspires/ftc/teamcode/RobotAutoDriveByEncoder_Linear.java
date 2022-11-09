@@ -169,7 +169,7 @@ public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
             newBackRightTarget = backRight.getCurrentPosition() + (int)(frontRightInches * COUNTS_PER_INCH);
             frontLeft.setTargetPosition(newFrontLeftTarget);
             backLeft.setTargetPosition(newBackLeftTarget);
-            frontRight.setTargetPosition(newRightTarget);
+            frontRight.setTargetPosition(newFrontRightTarget);
             backRight.setTargetPosition(newBackRightTarget);
 
             // Turn On RUN_TO_POSITION
