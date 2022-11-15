@@ -33,6 +33,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -60,6 +62,17 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
     private DcMotor frontRight = null;
     private DcMotor backLeft = null;
     private DcMotor backRight = null;
+    public static final double NEW_P = 2.5;
+    public static final double NEW_I = 0.1;
+    public static final double NEW_D = 0.2;
+    public static final double NEW_F = 0.5;
+
+    private DcMotorEx lift = null;
+    private Servo claw = null;
+
+    private final int LIFT_LOW = 0; //TODO: find actual values
+    private final int LIFT_MEDIUM = 1000; //TODO: find actual values
+    private final int LIFT_HIGH = 2000; //TODO: find actual values
 
     @Override
     public void runOpMode() {
@@ -88,8 +101,18 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
+        // variables for automatic lift control using DPAD
+        boolean dpadDown = false; // button to move lift to low position    
+        boolean dpadRight = false; // button to move lift to medium position
+        boolean dpadUp = false; // button to move lift to high position
+
+
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
+
+            //variable for canceling auto lift
+            boolean dpadLeft = gamepad1.dpad_left; // button to cancel automatic lift movement
+
 
             double y = -gamepad1.left_stick_y;
             double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
@@ -108,6 +131,81 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             backLeft.setPower(backLeftPower);
             frontRight.setPower(frontRightPower);
             backRight.setPower(backRightPower);
+
+
+
+            if (gamepad1.dpad_down && !(dpadLeft || dpadRight || dpadUp)) {
+                dpadDown = true;
+            } else if (gamepad1.dpad_right && !(dpadLeft || dpadDown || dpadUp)) {
+                dpadRight = true;
+            } else if (gamepad1.dpad_up && !(dpadLeft || dpadRight || dpadDown)) {
+                dpadUp = true;
+            }
+
+  // logic for automatic lift control
+            if (dpadLeft) {
+                dpadDown = false;
+                dpadRight = false;
+                dpadUp = false;
+            } else if (dpadDown) {
+                lift.setTargetPosition(LIFT_LOW);
+                lift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+                lift.setPower(0.5);
+                if (Math.abs(lift.getCurrentPosition()-LIFT_LOW) < 10) {
+                    dpadDown = false;
+                }
+            } else if (dpadRight) {
+                lift.setTargetPosition(LIFT_MEDIUM);
+                lift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+                lift.setPower(0.5);
+                if (Math.abs(lift.getCurrentPosition()-LIFT_MEDIUM) < 10) {
+                    dpadRight = false;
+                }
+            } else if (dpadUp) {
+                lift.setTargetPosition(LIFT_HIGH);
+                lift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+                lift.setPower(0.5);
+                if (Math.abs(lift.getCurrentPosition()-LIFT_HIGH) < 10) {
+                    dpadUp = false;
+                }
+            } else {
+                lift.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+                lift.setPower(0);
+            }
+
+            // variables for manual lift control
+            double triggerLeft = gamepad1.left_trigger;
+            double triggerRight = gamepad1.right_trigger;
+
+            // Logic for manual lift controls (left trigger lowers, right trigger raises)
+            if (triggerLeft > 0.05) {
+                dpadDown = false;
+                dpadRight = false;
+                dpadUp = false;
+                lift.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+                lift.setPower(-triggerLeft);
+            } else if (triggerRight > 0.05) {
+                dpadDown = false;
+                dpadRight = false;
+                dpadUp = false;
+                lift.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+                lift.setPower(triggerRight);
+            } else if (lift.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER) {
+                lift.setPower(0);
+            }
+
+            // variables for claw control
+            boolean bumperLeft = gamepad1.left_bumper;
+            boolean bumperRight = gamepad1.right_bumper;
+
+            // Logic for claw controls (A opens, B closes)
+            if (bumperLeft) {
+                claw.setPosition(0); //TODO: find actual values
+            } else if (bumperRight) {
+                claw.setPosition(1); //TODO: find actual values
+            }
+
+
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
