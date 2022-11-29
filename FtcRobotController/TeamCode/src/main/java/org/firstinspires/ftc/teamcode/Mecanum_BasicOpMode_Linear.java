@@ -67,8 +67,8 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
     public static final double NEW_D = 0.2;
     public static final double NEW_F = 0.5;
 
-    private DcMotorEx lift = hardwareMap.get(DcMotorEx.class, "lift");
-    private Servo claw = hardwareMap.get(Servo.class, "claw");
+    private DcMotorEx lift;
+    private Servo claw;
 
     private final int LIFT_LOW = 0; //TODO: find actual values
     private final int LIFT_MEDIUM = 1000; //TODO: find actual values
@@ -86,6 +86,8 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
+        lift = hardwareMap.get(DcMotorEx.class, "lift");
+        claw = hardwareMap.get(Servo.class, "claw");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
