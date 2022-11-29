@@ -67,7 +67,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
     public static final double NEW_D = 0.2;
     public static final double NEW_F = 0.5;
 
-    private DcMotorEx lift = hardwareMap.get(DcMotor.class, "lift");
+    private DcMotorEx lift = hardwareMap.get(DcMotorEx.class, "lift");
     private Servo claw = hardwareMap.get(Servo.class, "claw");
 
     private final int LIFT_LOW = 0; //TODO: find actual values
