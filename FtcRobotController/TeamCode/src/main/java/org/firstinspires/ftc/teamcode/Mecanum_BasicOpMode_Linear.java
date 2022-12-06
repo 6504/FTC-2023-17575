@@ -68,7 +68,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
     public static final double NEW_F = 0.5;
 
     private DcMotorEx lift1;
-    private DcMotorEx lift2
+    private DcMotorEx lift2;
     private Servo claw;
 
     private final int LIFT_LOW = 0; //TODO: find actual values
@@ -154,7 +154,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             if (dpadLeft) {
                 dpadDown = false;
                 dpadRight = false;
-                dpadUp = false
+                dpadUp = false;
             } else if (dpadDown) {
                 lift1.setTargetPosition(LIFT_LOW);
                 lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
@@ -222,7 +222,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 lift1.setPower(triggerRight);
                 lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift2.setPower(triggerRight);
-            } else if (lift.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER 
+            } else if (lift1.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER 
             && lift2.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER) {
                 lift1.setPower(0);
                 lift2.setPower(0);
@@ -247,7 +247,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             telemetry.addData("LeftMotors", "frontLeft (%.2f), backLeft (%.2f)", frontLeftPower, backLeftPower);
             telemetry.addData("RightMotors", "frontRight (%.2f), backRight (%.2f)", frontRightPower, backRightPower);
             //Expiremental adding telemtnary to figure out autonomous
-            telemetry.addData("Lift Claw", "lift (%.2f), claw (%.2f)", lift1.getCurrentPosition(), claw.getCurrentPosition());
+            telemetry.addData("Lift Claw", "lift (%.2f), claw (%.2f)", lift1.getCurrentPosition(), claw.getPosition());
             
             
             telemetry.update();

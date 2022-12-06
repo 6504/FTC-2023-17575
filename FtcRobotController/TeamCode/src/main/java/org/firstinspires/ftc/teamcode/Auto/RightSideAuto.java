@@ -63,7 +63,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name="Robot: Auto Drive By Encoder Right Side", group="Robot")
-@Disabled
 public class RightSideAuto extends LinearOpMode {
 
     /* Declare OpMode members. */
