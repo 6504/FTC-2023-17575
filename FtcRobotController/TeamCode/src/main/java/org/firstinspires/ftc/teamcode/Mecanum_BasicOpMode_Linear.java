@@ -234,9 +234,9 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
 
             // Logic for claw controls (A opens, B closes)
             if (bumperLeft) {
-                claw.setPosition(0); //TODO: find actual values
+                claw.setPosition(0.0); //TODO: find actual values
             } else if (bumperRight) {
-                claw.setPosition(1); //TODO: find actual values
+                claw.setPosition(1.0); //TODO: find actual values
             }
 
 
