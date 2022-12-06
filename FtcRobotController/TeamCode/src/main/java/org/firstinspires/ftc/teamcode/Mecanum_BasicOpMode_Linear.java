@@ -148,7 +148,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             if (dpadLeft) {
                 dpadDown = false;
                 dpadRight = false;
-                dpadUp = false;
+                dpadUp = false
             } else if (dpadDown) {
                 lift.setTargetPosition(LIFT_LOW);
                 lift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
@@ -213,6 +213,10 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("LeftMotors", "frontLeft (%.2f), backLeft (%.2f)", frontLeftPower, backLeftPower);
             telemetry.addData("RightMotors", "frontRight (%.2f), backRight (%.2f)", frontRightPower, backRightPower);
+            //Expiremental adding telemtnary to figure out autonomous
+            telemetry.addData("Lift Claw", "lift (%.2f), claw (%.2f)", lift.getCurrentPosition(), claw.getCurrentPosition());
+            
+
             telemetry.update();
         }
     }
