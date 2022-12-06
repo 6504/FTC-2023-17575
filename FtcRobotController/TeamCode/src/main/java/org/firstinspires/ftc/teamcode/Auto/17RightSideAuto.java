@@ -76,7 +76,8 @@ public class 17RightSideAuto extends LinearOpMode {
     public static final double NEW_D = 0.2;
     public static final double NEW_F = 0.5;
 
-    private DcMotorEx lift;
+    private DcMotorEx lift1;
+    private DcMotorEx lift2;
     private Servo claw;
 
     private final int LIFT_LOW = 0; //TODO: find actual values
@@ -107,7 +108,9 @@ public class 17RightSideAuto extends LinearOpMode {
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        lift = hardwareMap.get(DcMotorEx.class, "lift");
+        lift1 = hardwareMap.get(DcMotorEx.class, "lift1");
+        lift2 = hardwareMap.get(DcMotorEx.class, "lift2");
+
         claw = hardwareMap.get(Servo.class, "claw");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -117,6 +120,10 @@ public class 17RightSideAuto extends LinearOpMode {
         backLeft.setDirection(DcMotor.Direction.REVERSE);
         frontRight.setDirection(DcMotor.Direction.FORWARD);
         backRight.setDirection(DcMotor.Direction.FORWARD);
+
+        lift1.setDirection(DcMotor.Direction.FORWARD);
+        lift2.setDirection(DcMotor.Direction.FORWARD);
+        claw.setDirection(Servo.Direction.FORWARD);
 
         // leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         // rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -145,9 +152,10 @@ public class 17RightSideAuto extends LinearOpMode {
         // encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
         // encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
-
-
+        claw.setPosition(0.0);
+        claw.setPosotion(1.0);
         encoderDrive(DRIVE_SPEED, 24, -24, -24, 24, 4.0);
+        
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
