@@ -67,7 +67,8 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
     public static final double NEW_D = 0.2;
     public static final double NEW_F = 0.5;
 
-    private DcMotorEx lift;
+    private DcMotorEx lift1;
+    private DcMotorEx lift2
     private Servo claw;
 
     private final int LIFT_LOW = 0; //TODO: find actual values
@@ -86,7 +87,8 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        lift = hardwareMap.get(DcMotorEx.class, "lift");
+        lift1 = hardwareMap.get(DcMotorEx.class, "lift1");
+        lift2 = hardwareMap.get(DcMotorEx.class, "lift2");
         claw = hardwareMap.get(Servo.class, "claw");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -98,6 +100,10 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
         backLeft.setDirection(DcMotor.Direction.REVERSE);
         frontRight.setDirection(DcMotor.Direction.FORWARD);
         backRight.setDirection(DcMotor.Direction.FORWARD);
+
+        lift1.setDirection(DcMotor.Direction.FORWARD);
+        lift2.setDirection(DcMotor.Direction.FORWARD);
+        claw.setDirection(Servo.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -150,29 +156,49 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 dpadRight = false;
                 dpadUp = false
             } else if (dpadDown) {
-                lift.setTargetPosition(LIFT_LOW);
-                lift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-                lift.setPower(0.5);
-                if (Math.abs(lift.getCurrentPosition()-LIFT_LOW) < 10) {
+                lift1.setTargetPosition(LIFT_LOW);
+                lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+                lift1.setPower(0.5);
+                if (Math.abs(lift1.getCurrentPosition()-LIFT_LOW) < 10) {
+                    dpadDown = false;
+                }
+                lift2.setTargetPosition(LIFT_LOW);
+                lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+                lift2.setPower(0.5);
+                if (Math.abs(lift2.getCurrentPosition()-LIFT_LOW) < 10) {
                     dpadDown = false;
                 }
             } else if (dpadRight) {
-                lift.setTargetPosition(LIFT_MEDIUM);
-                lift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-                lift.setPower(0.5);
-                if (Math.abs(lift.getCurrentPosition()-LIFT_MEDIUM) < 10) {
+                lift1.setTargetPosition(LIFT_MEDIUM);
+                lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+                lift1.setPower(0.5);
+                if (Math.abs(lift1.getCurrentPosition()-LIFT_MEDIUM) < 10) {
+                    dpadRight = false;
+                }
+                lift2.setTargetPosition(LIFT_MEDIUM);
+                lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+                lift2.setPower(0.5);
+                if (Math.abs(lift2.getCurrentPosition()-LIFT_MEDIUM) < 10) {
                     dpadRight = false;
                 }
             } else if (dpadUp) {
-                lift.setTargetPosition(LIFT_HIGH);
-                lift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-                lift.setPower(0.5);
-                if (Math.abs(lift.getCurrentPosition()-LIFT_HIGH) < 10) {
+                lift1.setTargetPosition(LIFT_HIGH);
+                lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+                lift1.setPower(0.5);
+                if (Math.abs(lift1.getCurrentPosition()-LIFT_HIGH) < 10) {
+                    dpadUp = false;
+                }   
+                lift2.setTargetPosition(LIFT_HIGH);
+                lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+                lift2.setPower(0.5);
+                if (Math.abs(lift2.getCurrentPosition()-LIFT_HIGH) < 10) {
                     dpadUp = false;
                 }
             } else {
-                lift.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-                lift.setPower(0);
+                lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+                lift1.setPower(0);
+                lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+                lift2.setPower(0);
             }
 
             // variables for manual lift control
@@ -184,16 +210,22 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 dpadDown = false;
                 dpadRight = false;
                 dpadUp = false;
-                lift.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-                lift.setPower(-triggerLeft);
+                lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+                lift1.setPower(-triggerLeft);
+                lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+                lift2.setPower(-triggerLeft);
             } else if (triggerRight > 0.05) {
                 dpadDown = false;
                 dpadRight = false;
                 dpadUp = false;
-                lift.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-                lift.setPower(triggerRight);
-            } else if (lift.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER) {
-                lift.setPower(0);
+                lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+                lift1.setPower(triggerRight);
+                lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+                lift2.setPower(triggerRight);
+            } else if (lift.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER 
+            && lift2.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER) {
+                lift1.setPower(0);
+                lift2.setPower(0);
             }
 
             // variables for claw control
@@ -214,9 +246,9 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             telemetry.addData("LeftMotors", "frontLeft (%.2f), backLeft (%.2f)", frontLeftPower, backLeftPower);
             telemetry.addData("RightMotors", "frontRight (%.2f), backRight (%.2f)", frontRightPower, backRightPower);
             //Expiremental adding telemtnary to figure out autonomous
-            telemetry.addData("Lift Claw", "lift (%.2f), claw (%.2f)", lift.getCurrentPosition(), claw.getCurrentPosition());
+            telemetry.addData("Lift Claw", "lift (%.2f), claw (%.2f)", lift1.getCurrentPosition(), claw.getCurrentPosition());
             
-
+            
             telemetry.update();
         }
     }
