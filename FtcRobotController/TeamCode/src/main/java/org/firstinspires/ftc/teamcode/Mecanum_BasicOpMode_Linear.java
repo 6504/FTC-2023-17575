@@ -76,6 +76,23 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
     private final int LIFT_HIGH = 2000; //TODO: find actual values
 
     @Override
+
+    public void autoLift(boolean dpadInput, double LIFT_POSITION){
+        lift1.setTargetPosition(LIFT_POSITION);
+        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift1.setPower(0.5);
+        if (Math.abs(lift1.getCurrentPosition()-LIFT_POSITION) < 10) {
+             dpadInput = false;
+            }
+        lift2.setTargetPosition(LIFT_POSITION);
+        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift2.setPower(0.5);
+        if (Math.abs(lift2.getCurrentPosition()-LIFT_POSITION) < 10) {
+            dpadInput = false;
+        }
+    }
+
+
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -154,46 +171,13 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             if (dpadLeft) {
                 dpadDown = false;
                 dpadRight = false;
-                dpadUp = false;
+                dpadUp = false;                
             } else if (dpadDown) {
-                lift1.setTargetPosition(LIFT_LOW);
-                lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-                lift1.setPower(0.5);
-                if (Math.abs(lift1.getCurrentPosition()-LIFT_LOW) < 10) {
-                    dpadDown = false;
-                }
-                lift2.setTargetPosition(LIFT_LOW);
-                lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-                lift2.setPower(0.5);
-                if (Math.abs(lift2.getCurrentPosition()-LIFT_LOW) < 10) {
-                    dpadDown = false;
-                }
+                autoLift(dpadDown, LIFT_LOW);
             } else if (dpadRight) {
-                lift1.setTargetPosition(LIFT_MEDIUM);
-                lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-                lift1.setPower(0.5);
-                if (Math.abs(lift1.getCurrentPosition()-LIFT_MEDIUM) < 10) {
-                    dpadRight = false;
-                }
-                lift2.setTargetPosition(LIFT_MEDIUM);
-                lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-                lift2.setPower(0.5);
-                if (Math.abs(lift2.getCurrentPosition()-LIFT_MEDIUM) < 10) {
-                    dpadRight = false;
-                }
+                autoLift(dpadRight, LIFT_MEDIUM);
             } else if (dpadUp) {
-                lift1.setTargetPosition(LIFT_HIGH);
-                lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-                lift1.setPower(0.5);
-                if (Math.abs(lift1.getCurrentPosition()-LIFT_HIGH) < 10) {
-                    dpadUp = false;
-                }   
-                lift2.setTargetPosition(LIFT_HIGH);
-                lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-                lift2.setPower(0.5);
-                if (Math.abs(lift2.getCurrentPosition()-LIFT_HIGH) < 10) {
-                    dpadUp = false;
-                }
+                autoLift(dpadUp, LIFT_MEDIUM);
             } else {
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift1.setPower(0);
