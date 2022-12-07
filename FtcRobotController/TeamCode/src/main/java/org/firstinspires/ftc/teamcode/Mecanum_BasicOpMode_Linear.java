@@ -159,6 +159,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
 
 
 
+
             if (gamepad1.dpad_down && !(dpadLeft || dpadRight || dpadUp)) {
                 dpadDown = true;
             } else if (gamepad1.dpad_right && !(dpadLeft || dpadDown || dpadUp)) {
@@ -177,7 +178,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             } else if (dpadRight) {
                 autoLift(dpadRight, LIFT_MEDIUM);
             } else if (dpadUp) {
-                autoLift(dpadUp, LIFT_MEDIUM);
+                autoLift(dpadUp, LIFT_HIGH);
             } else {
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift1.setPower(0);
