@@ -104,22 +104,24 @@ public class _17RightSideAuto extends LinearOpMode {
     static final double     TURN_SPEED              = 0.5;
 
     public void autoLift(double liftHeight){
-        lift1.setTargetPosition(liftHeight); 
-        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION); //this order is needed
         lift1.setPower(0.5);
-        lift2.setTargetPosition(liftHeight);
+        lift1.setTargetPosition(liftHeight); 
+       
+       
         lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         lift2.setPower(0.5);
+        lift2.setTargetPosition(liftHeight);
        // claw.setPosition(0.0);
     }
 
     public void groundLevel(){ //TODO: FIND A WAY TO SET POSOTION 0 ON MOTOR
-        lift1.setTargetPosition(0); //go to ground level lift
-        lift2.setTargetPosition(0);
         lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         lift1.setPower(0.5);
+        lift1.setTargetPosition(0); //go to ground level lift
+        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         lift2.setPower(0.5);
+        lift2.setTargetPosition(0);
 
     }
 
@@ -184,12 +186,16 @@ public class _17RightSideAuto extends LinearOpMode {
 
         //length 17 in
         //width 17 in
-        
+        //radius 9 inch
+
+
         //around 33 inches the circumfrence
         //14 inch end of wheel per wheel
         //10 inch beginning of wheel to wheel
         //width, metal to metal 13
         // width inner thing per inner thing 9
+        //3.5 inches behind the robot to the edge of it for the claw thing when stationary
+        //2 inches ahead of the robot when holding cone
         
         //4.4 seconds for full revolution of 15 team, assume heavier
         
@@ -237,14 +243,6 @@ public class _17RightSideAuto extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, -6, -6, -6, -6, 1.0); //move backwards
         encoderDrive(DRIVE_SPEED, 36, -36, 36, -36, 4.0) //parking back into the terminal
 
-
-        
-        
-
-
-
-
-        encoderDrive(DRIVE_SPEED, )
 
         lift1.setTargetPosition(LIFT_LOW); 
         lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
