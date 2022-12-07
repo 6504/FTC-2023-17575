@@ -226,13 +226,22 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
 
 
 
-            // Show the elapsed game time and wheel power.
+
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("LeftMotors", "frontLeft (%.2f), backLeft (%.2f)", frontLeftPower, backLeftPower);
             telemetry.addData("RightMotors", "frontRight (%.2f), backRight (%.2f)", frontRightPower, backRightPower);
             //Expiremental adding telemtnary to figure out autonomous
-            telemetry.addData("Lift Claw", "lift (%.2f), claw (%.2f)", lift1.getCurrentPosition(), claw.getPosition());
+            //telemetry.addData("Lift Claw", "lift (%.2f), claw (%.2f)", lift1.getCurrentPosition(), claw.getPosition());
             
+            // Show the elapsed game time and wheel power.
+           // telemetry.addData("Status", "Run Time: " + runtime.toString());
+            // telemetry.addData("LeftMotors", "frontLeft (%.2f), backLeft (%.2f)", frontLeftPower, backLeftPower);
+            // telemetry.addData("RightMotors", "frontRight (%.2f), backRight (%.2f)", frontRightPower, backRightPower);
+            // telemetry.addData("Buttons", "A: %b, B: %b, X: %b, Y: %b", buttonA, buttonB, buttonX, buttonY);
+             telemetry.addData("Lift", "Position: %d, Power: %.2f", lift1.getCurrentPosition(), lift1.getPower());
+             telemetry.addData("Claw", "Position: %.2f", claw.getPosition());
+            // telemetry.addData("Bumpers Boolean", "Left: %b, Right: %b", bumperLeft, bumperRight);
+            // telemetry.addData("Bumpers Controller", "Left: %b, Right: %b", gamepad1.left_bumper, gamepad1.right_bumper);
             
             telemetry.update();
         }
