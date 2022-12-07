@@ -103,6 +103,18 @@ public class _17RightSideAuto extends LinearOpMode {
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
 
+    public void autoLift(double liftHeight){
+        lift1.setTargetPosition(liftHeight); 
+        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift1.setPower(0.5);
+        lift2.setTargetPosition(liftHeight);
+        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift2.setPower(0.5);
+        claw.setPosition(0.0);
+
+    }
+
+
     @Override
     public void runOpMode() {
 
@@ -156,9 +168,16 @@ public class _17RightSideAuto extends LinearOpMode {
         // encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         claw.setPosition(0.0);
-        claw.setPosition(1.0);
-        encoderDrive(DRIVE_SPEED, 24, -24, -24, 24, 4.0);
+        claw.setPosition(0.1);
+        encoderDrive(DRIVE_SPEED, -24, 24, 24, -24, 4.0); //drive to the left inner close to substation
+        encoderDrive(DRIVE_SPEED, 72, 72, 72, 72, 8.0); //drive up to the large height
+        encoderDrive(TURN_SPEED, 6, 6, -6, -6, 1.0); //turn 45 degrees toward large thing
+        encoderDrive(DRIVE_SPEED, 6, 6, 6, 6, 1.0); //move forward
+        autoLift(LIFT_HIGH); 
 
+
+
+        encoderDrive(DRIVE_SPEED, )
 
         lift1.setTargetPosition(LIFT_LOW); 
         lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
