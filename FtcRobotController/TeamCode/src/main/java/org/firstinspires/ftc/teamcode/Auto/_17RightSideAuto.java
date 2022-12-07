@@ -103,7 +103,6 @@ public class _17RightSideAuto extends LinearOpMode {
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
 
-<<<<<<< HEAD
     public void autoLift(double liftHeight){
         lift1.setTargetPosition(liftHeight); 
         lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
@@ -123,20 +122,6 @@ public class _17RightSideAuto extends LinearOpMode {
     }
 
 
-=======
-    public void autoLift(double liftHeight){
-        lift1.setTargetPosition(liftHeight); 
-        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        lift1.setPower(0.5);
-        lift2.setTargetPosition(liftHeight);
-        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        lift2.setPower(0.5);
-        claw.setPosition(0.0);
-
-    }
-
-
->>>>>>> ede9a32ba5fe939d1e1755e3317a75e4ebca5f74
     @Override
     public void runOpMode() {
 
