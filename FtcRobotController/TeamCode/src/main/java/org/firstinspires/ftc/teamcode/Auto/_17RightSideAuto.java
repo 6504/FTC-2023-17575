@@ -158,7 +158,15 @@ public class _17RightSideAuto extends LinearOpMode {
         claw.setPosition(0.0);
         claw.setPosition(1.0);
         encoderDrive(DRIVE_SPEED, 24, -24, -24, 24, 4.0);
-        
+
+
+        lift1.setTargetPosition(LIFT_LOW); 
+        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift1.setPower(0.5);
+        lift2.setTargetPosition(LIFT_LOW);
+        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift2.setPower(0.5);
+        claw.setPosition(0.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
