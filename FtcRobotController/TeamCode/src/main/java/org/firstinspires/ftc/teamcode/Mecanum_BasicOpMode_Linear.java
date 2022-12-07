@@ -75,23 +75,33 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
     private final int LIFT_MEDIUM = 1000; //TODO: find actual values
     private final int LIFT_HIGH = 2000; //TODO: find actual values
 
-    @Override
+    // Calculate the COUNTS_PER_INCH for your specific drive train.
+    // Go to your motor vendor website to determine your motor's COUNTS_PER_MOTOR_REV
+    // For external drive gearing, set DRIVE_GEAR_REDUCTION as needed.
+    // For example, use a value of 2.0 for a 12-tooth spur gear driving a 24-tooth spur gear.
+    // This is gearing DOWN for less speed and more torque.
+    // For gearing UP, use a gear ratio less than 1.0. Note this will affect the direction of wheel rotation.
+    static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
+    static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
+    static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
+    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+                                                      (WHEEL_DIAMETER_INCHES * 3.1415);
 
     public void autoLift(boolean dpadInput, double LIFT_POSITION){
-        lift1.setTargetPosition(LIFT_POSITION);
-        lift2.setTargetPosition(LIFT_POSITION);
+        lift1.setTargetPosition((int)(LIFT_POSITION * COUNTS_PER_INCH));
+        lift2.setTargetPosition((int)(LIFT_POSITION* COUNTS_PER_INCH));
         lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         lift1.setPower(0.5);
         lift2.setPower(0.5);
-        if ((Math.abs(lift1.getCurrentPosition()-LIFT_POSITION) < 10) 
-        || (Math.abs(lift2.getCurrentPosition()-LIFT_POSITION) < 10)) {
+        if ((Math.abs(lift1.getCurrentPosition()-((int)LIFT_POSITION* COUNTS_PER_INCH)) < 10) 
+        || (Math.abs(lift2.getCurrentPosition()-((int)LIFT_POSITION* COUNTS_PER_INCH)) < 10)) {
              dpadInput = false;
             }
 
     }
 
-
+    @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
