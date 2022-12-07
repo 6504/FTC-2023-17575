@@ -229,13 +229,13 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             }
 
             // variables for claw control
-            boolean bumperLeft = gamepad1.left_bumper;
-            boolean bumperRight = gamepad1.right_bumper;
+            boolean buttonA = gamepad1.a;
+            boolean buttonB = gamepad1.b;
 
             // Logic for claw controls (A opens, B closes)
-            if (bumperLeft) {
+            if (buttonA) {
                 claw.setPosition(0.0); //TODO: find actual values
-            } else if (bumperRight) {
+            } else if (buttonB) {
                 claw.setPosition(0.1); //TODO: find actual values
             }
             
