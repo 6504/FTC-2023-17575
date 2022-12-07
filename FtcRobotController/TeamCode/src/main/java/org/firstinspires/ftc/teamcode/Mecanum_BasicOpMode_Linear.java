@@ -79,17 +79,16 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
 
     public void autoLift(boolean dpadInput, double LIFT_POSITION){
         lift1.setTargetPosition(LIFT_POSITION);
+        lift2.setTargetPosition(LIFT_POSITION);
         lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         lift1.setPower(0.5);
-        if (Math.abs(lift1.getCurrentPosition()-LIFT_POSITION) < 10) {
+        lift2.setPower(0.5);
+        if ((Math.abs(lift1.getCurrentPosition()-LIFT_POSITION) < 10) 
+        || (Math.abs(lift2.getCurrentPosition()-LIFT_POSITION) < 10)) {
              dpadInput = false;
             }
-        lift2.setTargetPosition(LIFT_POSITION);
-        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        lift2.setPower(0.5);
-        if (Math.abs(lift2.getCurrentPosition()-LIFT_POSITION) < 10) {
-            dpadInput = false;
-        }
+
     }
 
 
@@ -181,8 +180,8 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 autoLift(dpadUp, LIFT_HIGH);
             } else {
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-                lift1.setPower(0);
                 lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+                lift1.setPower(0);
                 lift2.setPower(0);
             }
 
@@ -196,16 +195,16 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 dpadRight = false;
                 dpadUp = false;
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-                lift1.setPower(-triggerLeft);
                 lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+                lift1.setPower(-triggerLeft);
                 lift2.setPower(-triggerLeft);
             } else if (triggerRight > 0.05) {
                 dpadDown = false;
                 dpadRight = false;
                 dpadUp = false;
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-                lift1.setPower(triggerRight);
                 lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+                lift1.setPower(triggerRight);
                 lift2.setPower(triggerRight);
             } else if (lift1.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER 
             && lift2.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER) {

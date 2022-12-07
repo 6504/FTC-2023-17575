@@ -103,6 +103,27 @@ public class _17RightSideAuto extends LinearOpMode {
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
 
+<<<<<<< HEAD
+    public void autoLift(double liftHeight){
+        lift1.setTargetPosition(liftHeight); 
+        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift1.setPower(0.5);
+        lift2.setTargetPosition(liftHeight);
+        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift2.setPower(0.5);
+        claw.setPosition(0.0);
+
+        lift1.setTargetPosition(0); //go to gorund level lift
+        lift2.setTargetPosition(0);
+        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift1.setPower(0.5);
+        lift2.setPower(0.5);
+
+    }
+
+
+=======
     public void autoLift(double liftHeight){
         lift1.setTargetPosition(liftHeight); 
         lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
@@ -115,6 +136,7 @@ public class _17RightSideAuto extends LinearOpMode {
     }
 
 
+>>>>>>> ede9a32ba5fe939d1e1755e3317a75e4ebca5f74
     @Override
     public void runOpMode() {
 
@@ -167,6 +189,14 @@ public class _17RightSideAuto extends LinearOpMode {
         // encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
         // encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
+<<<<<<< HEAD
+        claw.setPosition(0.1);
+        encoderDrive(DRIVE_SPEED, -24, 24, 24, -24, 4.0); //drive to the left inner close to substation
+        encoderDrive(DRIVE_SPEED, 72, 72, 72, 72, 8.0); //drive up to the large height
+        encoderDrive(TURN_SPEED, 6, 6, -6, -6, 1.0); //turn 45 degrees toward large thing
+        encoderDrive(DRIVE_SPEED, 6, 6, 6, 6, 1.0); //move forward
+        autoLift(LIFT_HIGH); 
+=======
         claw.setPosition(0.0);
         claw.setPosition(0.1);
         encoderDrive(DRIVE_SPEED, -24, 24, 24, -24, 4.0); //drive to the left inner close to substation
@@ -174,6 +204,7 @@ public class _17RightSideAuto extends LinearOpMode {
         encoderDrive(TURN_SPEED, 6, 6, -6, -6, 1.0); //turn 45 degrees toward large thing
         encoderDrive(DRIVE_SPEED, 6, 6, 6, 6, 1.0); //move forward
         autoLift(LIFT_HIGH); 
+>>>>>>> ede9a32ba5fe939d1e1755e3317a75e4ebca5f74
 
 
 
