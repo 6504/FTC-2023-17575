@@ -128,7 +128,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
         backRight.setDirection(DcMotor.Direction.FORWARD);
 
         lift1.setDirection(DcMotor.Direction.FORWARD);
-        lift2.setDirection(DcMotor.Direction.FORWARD);
+        lift2.setDirection(DcMotor.Direction.REVERSE);
         claw.setDirection(Servo.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
