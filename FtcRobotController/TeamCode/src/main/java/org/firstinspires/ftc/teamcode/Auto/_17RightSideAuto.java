@@ -112,7 +112,7 @@ public class _17RightSideAuto extends LinearOpMode {
         lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         lift2.setPower(0.5);
         lift2.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH));
-       // claw.setPosition(0.0);
+       // claw.setPosition(0.0); 
     }
 
     public void groundLevel(){ //TODO: FIND A WAY TO SET POSOTION 0 ON MOTOR
@@ -280,9 +280,9 @@ public class _17RightSideAuto extends LinearOpMode {
 
             // Determine new target position, and pass to motor controller
             newFrontLeftTarget = frontLeft.getCurrentPosition() + (int)(frontLeftInches * COUNTS_PER_INCH);
-            newBackLeftTarget = backLeft.getCurrentPosition() + (int)(backRightInches * COUNTS_PER_INCH);
+            newBackLeftTarget = backLeft.getCurrentPosition() + (int)(backLeftInches * COUNTS_PER_INCH);
             newFrontRightTarget = frontRight.getCurrentPosition() + (int)(frontRightInches * COUNTS_PER_INCH);
-            newBackRightTarget = backRight.getCurrentPosition() + (int)(frontRightInches * COUNTS_PER_INCH);
+            newBackRightTarget = backRight.getCurrentPosition() + (int)(backRightInches * COUNTS_PER_INCH);
             frontLeft.setTargetPosition(newFrontLeftTarget);
             backLeft.setTargetPosition(newBackLeftTarget);
             frontRight.setTargetPosition(newFrontRightTarget);
