@@ -237,7 +237,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
 
 
 
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
+/*            telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("LeftMotors", "frontLeft (%.2f), backLeft (%.2f)", frontLeftPower, backLeftPower);
             telemetry.addData("RightMotors", "frontRight (%.2f), backRight (%.2f)", frontRightPower, backRightPower);
             telemetry.addData("Lift1", "Position1: %d, Power1: %.2f", lift1.getCurrentPosition(), lift1.getPower());
@@ -245,7 +245,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             telemetry.addData("Claw", "Position: %.2f", claw.getPosition());
             telemetry.addData("Buttons", "A: %b, B: %b", buttonA, buttonB);
             telemetry.addData("DPad", "Up: %b, Down: %b, Left: %b, Right: %b", dpadUp, dpadDown, dpadLeft, dpadRight);
-
+*/
             //Expiremental adding telemtnary to figure out autonomous            
             // Show the elapsed game time and wheel power.
             // telemetry.addData("Bumpers Boolean", "Left: %b, Right: %b", bumperLeft, bumperRight);
