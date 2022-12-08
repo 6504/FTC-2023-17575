@@ -66,7 +66,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @Autonomous(name="Robot: _17RightSideAutoBT", group="Robot")
-public class _17RightSideAuto extends LinearOpMode {
+public class _17RightSideAutoBT extends LinearOpMode {
 
     /* Declare OpMode members. */
     private DcMotor frontLeft= null;
