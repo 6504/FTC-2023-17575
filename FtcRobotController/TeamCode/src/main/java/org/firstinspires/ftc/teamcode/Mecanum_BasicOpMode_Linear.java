@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.robotcontroller.external.samples;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -243,7 +243,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             telemetry.addData("Lift1", "Position1: %d, Power1: %.2f", lift1.getCurrentPosition(), lift1.getPower());
             telemetry.addData("Lift2", "Position2: %d, Power2: %.2f", lift2.getCurrentPosition(), lift2.getPower());
             telemetry.addData("Claw", "Position: %.2f", claw.getPosition());
-            telemetry.addData("Buttons", "A: %b, B: %b, X: %b, Y: %b", buttonA, buttonB, buttonX, buttonY);
+            telemetry.addData("Buttons", "A: %b, B: %b", buttonA, buttonB);
             telemetry.addData("DPad", "Up: %b, Down: %b, Left: %b, Right: %b", dpadUp, dpadDown, dpadLeft, dpadRight);
 
             //Expiremental adding telemtnary to figure out autonomous            

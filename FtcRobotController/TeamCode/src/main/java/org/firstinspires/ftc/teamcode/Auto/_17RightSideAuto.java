@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.robotcontroller.external.samples;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -235,7 +235,7 @@ public class _17RightSideAuto extends LinearOpMode {
         //low level cone
         autoLift(0.0); //lower to cone stack
         claw.setPosition(0.1);
-        autoLift(LIFT_LOW)); //lift cone
+        autoLift(LIFT_LOW); //lift cone
         encoderDrive(DRIVE_SPEED, -49.5, -49.5, -49.5, -49.5, 8.0); //go back to thing
         encoderDrive(TURN_SPEED, -7.07, -7.07, 7.07, 7.07, 1.0); //rotate 45 degrees left
         encoderDrive(DRIVE_SPEED, -48, -48, -48, -48, 8.0); //go back to near starting thing
