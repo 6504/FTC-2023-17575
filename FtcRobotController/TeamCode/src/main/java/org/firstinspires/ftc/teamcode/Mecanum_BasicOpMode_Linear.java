@@ -190,8 +190,8 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 autoLift(dpadUp, LIFT_HIGH);
             } else {
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-                lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift1.setPower(0);
+                lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift2.setPower(0);
             }
 
@@ -205,16 +205,16 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 dpadRight = false;
                 dpadUp = false;
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-                lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift1.setPower(-triggerLeft);
+                lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift2.setPower(-triggerLeft);
             } else if (triggerRight > 0.05) {
                 dpadDown = false;
                 dpadRight = false;
                 dpadUp = false;
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-                lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift1.setPower(triggerRight);
+                lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift2.setPower(triggerRight);
             } else if (lift1.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER 
             && lift2.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER) {
@@ -240,16 +240,14 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("LeftMotors", "frontLeft (%.2f), backLeft (%.2f)", frontLeftPower, backLeftPower);
             telemetry.addData("RightMotors", "frontRight (%.2f), backRight (%.2f)", frontRightPower, backRightPower);
-            //Expiremental adding telemtnary to figure out autonomous
-            //telemetry.addData("Lift Claw", "lift (%.2f), claw (%.2f)", lift1.getCurrentPosition(), claw.getPosition());
-            
+            telemetry.addData("Lift1", "Position1: %d, Power1: %.2f", lift1.getCurrentPosition(), lift1.getPower());
+            telemetry.addData("Lift2", "Position2: %d, Power2: %.2f", lift2.getCurrentPosition(), lift2.getPower());
+            telemetry.addData("Claw", "Position: %.2f", claw.getPosition());
+            telemetry.addData("Buttons", "A: %b, B: %b, X: %b, Y: %b", buttonA, buttonB, buttonX, buttonY);
+            telemetry.addData("DPad", "Up: %b, Down: %b, Left: %b, Right: %b", dpadUp, dpadDown, dpadLeft, dpadRight);
+
+            //Expiremental adding telemtnary to figure out autonomous            
             // Show the elapsed game time and wheel power.
-           // telemetry.addData("Status", "Run Time: " + runtime.toString());
-            // telemetry.addData("LeftMotors", "frontLeft (%.2f), backLeft (%.2f)", frontLeftPower, backLeftPower);
-            // telemetry.addData("RightMotors", "frontRight (%.2f), backRight (%.2f)", frontRightPower, backRightPower);
-            // telemetry.addData("Buttons", "A: %b, B: %b, X: %b, Y: %b", buttonA, buttonB, buttonX, buttonY);
-             telemetry.addData("Lift", "Position: %d, Power: %.2f", lift1.getCurrentPosition(), lift1.getPower());
-             telemetry.addData("Claw", "Position: %.2f", claw.getPosition());
             // telemetry.addData("Bumpers Boolean", "Left: %b, Right: %b", bumperLeft, bumperRight);
             // telemetry.addData("Bumpers Controller", "Left: %b, Right: %b", gamepad1.left_bumper, gamepad1.right_bumper);
             
