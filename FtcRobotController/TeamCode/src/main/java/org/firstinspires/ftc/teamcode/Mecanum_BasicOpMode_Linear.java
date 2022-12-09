@@ -130,7 +130,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
         frontRight.setDirection(DcMotor.Direction.FORWARD);
         backRight.setDirection(DcMotor.Direction.FORWARD);
 
-        lift1.setDirection(DcMotor.Direction.FORWARD);
+        lift1.setDirection(DcMotor.Direction.REVERSE);
         lift2.setDirection(DcMotor.Direction.FORWARD);
         claw.setDirection(Servo.Direction.FORWARD);
 
