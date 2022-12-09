@@ -238,13 +238,15 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 lift1.setPower((triggerRight)*.2);
                 lift2.setPower((triggerRight)*.2);
             } else {
-                lift1.setTargetPosition(lift1.getTargetPosition());
+                /*lift1.setTargetPosition(lift1.getTargetPosition());
                 lift1.setPower(1);
                 lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
 
                 lift2.setTargetPosition(lift2.getTargetPosition());
                 lift2.setPower(1);
-                lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+                lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);*/
+                lift1.setPower(0);
+                lift2.setPower(0);
             }
 
 
