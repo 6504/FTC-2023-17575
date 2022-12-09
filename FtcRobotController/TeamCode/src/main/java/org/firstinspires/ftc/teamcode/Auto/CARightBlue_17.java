@@ -120,17 +120,6 @@ public class CARightBlue_17 extends LinearOpMode {
        // claw.setPosition(0.0); 
     }
 
-    public void groundLevel(){ //TODO: FIND A WAY TO SET POSOTION 0 ON MOTOR
-        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        lift1.setPower(0.5);
-        lift1.setTargetPosition(0); //go to ground level lift
-        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        lift2.setPower(0.5);
-        lift2.setTargetPosition(0);
-
-    }
-
-
     @Override
     public void runOpMode() {
 
@@ -183,30 +172,7 @@ public class CARightBlue_17 extends LinearOpMode {
         // encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
         // encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
-        claw.setPosition(0.1);
-
-        //TODO: FIND TEH EXACT PLACEMENT IN INCHES THE ROBOT WILL BE PLACED
-
-
-        //length 17 in
-        //width 17 in
-        //radius 9 inch
-        //7.07 in for 45 degrees
-        //35.35 in for 135 degrees
-        //24 inch for one square
-        //4.4 seconds for full revolution of 15 team, assume heavier
-        //3.5 from square for center
-
-        //2 inches ahead of the robot when holding cone
-
-
-        //around 33 inches the circumfrence
-        //14 inch end of wheel per wheel
-        //10 inch beginning of wheel to wheel
-        //width, metal to metal 13
-        // width inner thing per inner thing 9
-        //3.5 inches behind the robot to the edge of it for the claw thing when stationary
-        
+        claw.setPosition(closeClaw);
 
         //high level cone 
         encoderDrive(DRIVE_SPEED, 3.5, 3.5, 3.5, 3.5, 1.0); //drive up a little
