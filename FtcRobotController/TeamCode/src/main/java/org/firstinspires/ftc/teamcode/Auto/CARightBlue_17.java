@@ -113,16 +113,39 @@ public class CARightBlue_17 extends LinearOpMode {
     private int coneHeight = (int) (indConeHeight + (coneDiff * conesTotal));
 
 
-    public void autoLift(double liftHeight){
+    public void autoLiftUP(double liftHeight){
         lift1.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH)); //watch out for this
-        lift1.setPower(0.5);
+        lift1.setPower(0.75);
         lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION); 
        
        
         lift2.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH));
-        lift2.setPower(0.5);
+        lift2.setPower(0.75);
         lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
     }
+
+    public void autoLiftDOWN(double liftHeight){
+        lift1.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH)); //watch out for this
+        lift1.setPower(0.4);
+        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION); 
+       
+       
+        lift2.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH));
+        lift2.setPower(0.4);
+        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+    }
+
+
+        //2ft/sec
+
+        //length 17 in
+        //width 17 in
+        //radius 9 inch
+        //7.07 in for 45 degrees
+        //35.35 in for 135 degrees
+        //24 inch for one square
+        //4.4 seconds for full revolution of 15 team, assume heavier
+        //3.5 from square for center
 
     @Override
     public void runOpMode() {
@@ -180,50 +203,59 @@ public class CARightBlue_17 extends LinearOpMode {
 
         //high level cone 
         encoderDrive(DRIVE_SPEED, 3.5, 3.5, 3.5, 3.5, 1.0); //drive up a little
-        encoderDrive(DRIVE_SPEED, -24, 24, 24, -24, 4.0); //drive to the left inner close to substation
-        encoderDrive(DRIVE_SPEED, 48, 48, 48, 48, 8.0); //drive up to the large height
-        encoderDrive(TURN_SPEED, 7.07, 7.07, -7.07, -7.07, 1.0); //turn 45 degrees toward large thing
-        autoLift(LIFT_HIGH);  
-        encoderDrive(DRIVE_SPEED, 4.1, 4.1, 4.1, 4.1, 1.0); //drives twoard the high level
+        encoderDrive(DRIVE_SPEED, -24, 24, 24, -24, 3.0); //drive to the left inner close to substation
+        encoderDrive(DRIVE_SPEED, 50.5, 50.5, 50.5, 50.5, 4.0); //drive up to the large height, 48 +3.5
+        autoLiftUP(LIFT_HIGH);  
+        encoderDrive(DRIVE_SPEED, -12, 12, 12, -12, 2.0); //go to the right toward the high pole
+       // encoderDrive(DRIVE_SPEED, 4.1, 4.1, 4.1, 4.1, 1.0); //drives twoard the high level
+       // encoderDrive(TURN_SPEED, 7.07, 7.07, -7.07, -7.07, 1.0); //turn 45 degrees toward large thing
+        sleep(2000);
         claw.setPosition(openClaw); //let go of the cone
 
-        encoderDrive(DRIVE_SPEED,-4.1, -4.1, -4.1, -4.1, 1.0); //move backwards
-        autoLift(coneHeight); //preparing to lift toward cone height
 
-        encoderDrive(TURN_SPEED, 7.07, 7.07, -7.07, -7.07, 1.0); //move 45 degrees again toward the right direction
-        encoderDrive(DRIVE_SPEED, 49.5, 49.5, 49.5, 49.5, 8.0); //
-        autoLift(coneHeight);
+        encoderDrive(DRIVE_SPEED,-3.5, -3.5, -3.5, 1.0); //move backwards
+        encoderDrive(TURN_SPEED, 14.15, 14.15, -14.15, -14.15, 2.5); //turn 90 degrees toward cone stack
+
+        // encoderDrive(TURN_SPEED, 7.07, 7.07, -7.07, -7.07, 1.0); //move 45 degrees again toward the right direction
+        encoderDrive(DRIVE_SPEED, 37, 37, 37, 37, 3.5); //go toward cone 12+ 24+ 3.5
+        sleep(3300);
+        autoLiftDOWN(coneHeight); //preparing to lift toward cone height
+        sleep(2000)
         claw.setPosition(closeClaw); //grabs cone
         conesTotal--;
 
         //medium level cone
-        autoLift(LIFT_MEDIUM);// back to medium height
-        encoderDrive(DRIVE_SPEED, -25.5, -25.5, -25.5, -25.5, 4.0); //goes toward medium height thing
-        encoderDrive(TURN_SPEED, 35.35, 35.35, -35.35, -35.35, 3.0); //rotate 135 degrees
-        encoderDrive(DRIVE_SPEED, 3.5, 3.5, 3.5, 3.5, 1.0); //move toward thing
+        autoLiftUP(LIFT_MEDIUM);// back to medium height
+        sleep(1000);
+        encoderDrive(DRIVE_SPEED, -37, -37, -37, -37, 4.0); //goes toward medium height thing 24 +12+ 3.5
+        encoderDrive(TURN_SPEED, 14.15, 14.15, -14.15, -14.15, 2.5); //rotate 90 degrees
+        encoderDrive(DRIVE_SPEED, 2, 2, 2, 2, 1.0); //move toward thing around 3.5
+        sleep(1000)
         claw.setPosition(openClaw); //drop
 
         encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move back
-        autoLift(coneHeight); //cone height
-        conesTotal--; //minus certain amount of tick for cone stack
-        encoderDrive(TURN_SPEED, -35.35, -35.35, 35.35, 35.35, 3.0); //turn 135 degrees tworad the cone stack
-        encoderDrive(DRIVE_SPEED, 25.5, 25.5, 25.5, 25.5, 4.0); //going to cone stack
+        encoderDrive(TURN_SPEED, -14.15, -14.15, 14.15, 14.15, 2.5); //turn 90 degrees tworad the cone stack
+        encoderDrive(DRIVE_SPEED, 37, 37, 37, 37, 3.5); //going to cone stack
+        sleep(3500);
 
         //low level cone
-        autoLift(coneHeight); //lower to cone stack
-        conesTotal--;
+        autoLiftDOWN(coneHeight); //cone height
+        conesTotal--; //minus certain amount of tick for cone stack
+        sleep(1000)
         claw.setPosition(closeClaw);
-        autoLift(LIFT_LOW); //lift cone
-        encoderDrive(DRIVE_SPEED, -49.5, -49.5, -49.5, -49.5, 8.0); //go back to thing
-        encoderDrive(TURN_SPEED, -7.07, -7.07, 7.07, 7.07, 1.0); //rotate 45 degrees left
-        encoderDrive(DRIVE_SPEED, -48, -48, -48, -48, 8.0); //go back to near starting thing
-        encoderDrive(DRIVE_SPEED, 12, -12, 12, -12, 3.0); //go to low cone position
+        autoLiftUP(LIFT_LOW); //lift cone
+        sleep(500);
+        encoderDrive(DRIVE_SPEED, -39.5, -39.5, -39.5, -39.5, 4.0); //go back to thing
+        encoderDrive(TURN_SPEED, -14.15, -14.15, 14.15, 14.15, 2.5); //rotate 90 degrees left
+        encoderDrive(DRIVE_SPEED, -50.5, -50.5, -50.5, -50.5, 4.0); //go back to near starting thing
+        encoderDrive(DRIVE_SPEED, 12, -12, 12, -12, 2.0); //go to low cone position
 
         encoderDrive(DRIVE_SPEED, 3.5, 3.5, 3.5, 3.5, 1.0); //move toward low cone position
+        sleep(1000);
         claw.setPosition(openClaw);//drop
         encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move backwards
-        encoderDrive(DRIVE_SPEED, 24, -24, 24, -24, 4.0); //parking back into the terminal
-        autoLift(0);
+        encoderDrive(DRIVE_SPEED, 24, -24, 24, -24, 2.0); //parking back into the terminal
+        autoLiftDOWN(0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

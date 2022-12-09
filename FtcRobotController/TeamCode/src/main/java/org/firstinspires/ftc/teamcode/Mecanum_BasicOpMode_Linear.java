@@ -235,17 +235,17 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
-                if (slowMode){ //slow mode
-                lift1.setPower((triggerRight)/2);
-                lift2.setPower((triggerRight)/2);
-                } else { //normal mode
-                lift1.setPower(triggerRight);
-                lift2.setPower(triggerRight);
+                lift1.setPower((triggerRight)*.2);
+                lift2.setPower((triggerRight)*.2);
                 }
-            } else if (lift1.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER 
-            && lift2.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER) {
-                lift1.setPower(0);
-                lift2.setPower(0);
+            } else {
+                lift1.setTargetPosition(lift1.getTargetPosition());
+                lift1.setPower(1);
+                lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+
+                lift2.setTargetPosition(lift2.getTargetPosition());
+                lift2.setPower(1);
+                lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             }
 
 
