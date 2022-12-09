@@ -102,7 +102,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
     }
 
     
-    boolean buttonY = gamepad1.y; //button to turn on slow mode 
+    
 
     @Override
     public void runOpMode() {
@@ -143,6 +143,9 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
         boolean dpadRight = false; // button to move lift to medium position
         boolean dpadUp = false; // button to move lift to high position
 
+        boolean buttonY = gamepad1.y; //button to turn on slow mode 
+        int slowMode = 0; //will tell me if i pressed it on or off
+
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -164,13 +167,18 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             double frontRightPower = (y - x - rx) / denominator;
             double backRightPower = (y + x - rx) / denominator;
 
-
+            if (buttonY && slowMode ==0){ //slow mode power
+            slowMode = 1;
+            frontLeft.setPower((frontLeftPower)/2);
+            backLeft.setPower((backLeftPower)/2);
+            frontRight.setPower((frontRightPower)/2);
+            backRight.setPower((backRightPower)/2);
+            } else { //normal mode
             frontLeft.setPower(frontLeftPower);
             backLeft.setPower(backLeftPower);
             frontRight.setPower(frontRightPower);
             backRight.setPower(backRightPower);
-
-
+            }
 
 
             if (gamepad1.dpad_down && !(dpadLeft || dpadRight || dpadUp)) {
@@ -209,22 +217,39 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 dpadRight = false;
                 dpadUp = false;
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-                lift1.setPower(-triggerLeft);
                 lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+
+                if (buttonY && slowMode ==1){ //slow mode
+                lift1.setPower((-triggerLeft)/2);
+                lift2.setPower((-triggerLeft)/2);
+                } else { //normal mode
+                lift1.setPower(-triggerLeft);
                 lift2.setPower(-triggerLeft);
+                }
+
             } else if (triggerRight > 0.05) {
                 dpadDown = false;
                 dpadRight = false;
                 dpadUp = false;
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-                lift1.setPower(triggerRight);
                 lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+
+                if (buttonY && slowMode==1){ //slow mode
+                lift1.setPower((triggerRight)/2);
+                lift2.setPower((triggerRight)/2);
+                } else { //normal mode
+                lift1.setPower(triggerRight);
                 lift2.setPower(triggerRight);
+                }
             } else if (lift1.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER 
             && lift2.getMode() == DcMotorEx.RunMode.RUN_WITHOUT_ENCODER) {
                 lift1.setPower(0);
                 lift2.setPower(0);
             }
+
+
+
+
 
             // variables for claw control
             boolean buttonA = gamepad1.a;
@@ -237,7 +262,8 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 claw.setPosition(0.7); //TODO: find actual values
             }
             
-
+            //to turn slow mode off
+            if (buttonY) buttonYCounter =0;
 
 
 
