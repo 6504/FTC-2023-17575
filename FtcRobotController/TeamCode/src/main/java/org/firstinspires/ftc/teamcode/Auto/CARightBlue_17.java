@@ -220,7 +220,7 @@ public class CARightBlue_17 extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, 12, -12, 12, -12, 3.0); //go to low cone position
 
         encoderDrive(DRIVE_SPEED, 3.5, 3.5, 3.5, 3.5, 1.0); //move toward low cone position
-        claw.setPosition(openClaw));//drop
+        claw.setPosition(openClaw);//drop
         encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move backwards
         encoderDrive(DRIVE_SPEED, 24, -24, 24, -24, 4.0); //parking back into the terminal
         autoLift(0);
