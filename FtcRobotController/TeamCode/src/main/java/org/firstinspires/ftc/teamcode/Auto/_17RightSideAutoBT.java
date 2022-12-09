@@ -85,7 +85,12 @@ public class _17RightSideAutoBT extends LinearOpMode {
     private final int LIFT_LOW = 0; //TODO: find actual values
     private final int LIFT_MEDIUM = 1000; //TODO: find actual values
     private final int LIFT_HIGH = 2000; //TODO: find actual values
+
+
     private int coneHeight = 0; //FIND CONE STACK HEIGHT
+
+    private double openClaw =0.3;
+    private double closecLaw =0.7;
 
     private ElapsedTime     runtime = new ElapsedTime();
 
@@ -210,7 +215,7 @@ public class _17RightSideAutoBT extends LinearOpMode {
         encoderDrive(TURN_SPEED, 7.07, 7.07, -7.07, -7.07, 1.0); //turn 45 degrees toward large thing
         autoLift(LIFT_HIGH);  
         encoderDrive(DRIVE_SPEED, 4.1, 4.1, 4.1, 4.1, 1.0); //drives twoard the high level
-        claw.setPosition(0.0); //let go of the cone
+        claw.setPosition(openClaw); //let go of the cone
 
         encoderDrive(DRIVE_SPEED,-4.1, -4.1, -4.1, -4.1, 1.0); //move backwards
         autoLift(0.0); //preparing to lift toward cone height
@@ -219,7 +224,7 @@ public class _17RightSideAutoBT extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, 49.5, 49.5, 49.5, 49.5, 8.0); //
         autoLift(coneHeight); //TODO: FIND POSITION USING STATS, lower into cone stack
         coneHeight-=0; //minus the height by a certain amount of ticks
-        claw.setPosition(0.1); //grabs cone
+        claw.setPosition(closeClaw); //grabs cone
 
 
         //medium level cone
@@ -227,7 +232,7 @@ public class _17RightSideAutoBT extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, -25.5, -25.5, -25.5, -25.5, 4.0); //goes toward medium height thing
         encoderDrive(TURN_SPEED, 35.35, 35.35, -35.35, -35.35, 3.0); //rotate 135 degrees
         encoderDrive(DRIVE_SPEED, 3.5, 3.5, 3.5, 3.5, 1.0); //move toward thing
-        claw.setPosition(0.0); //drop
+        claw.setPosition(openClaw); //drop
 
         encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move back
         autoLift(coneHeight); //cone height
