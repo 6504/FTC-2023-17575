@@ -131,7 +131,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
         backRight.setDirection(DcMotor.Direction.FORWARD);
 
         lift1.setDirection(DcMotor.Direction.FORWARD);
-        lift2.setDirection(DcMotor.Direction.REVERSE);
+        lift2.setDirection(DcMotor.Direction.FORWARD);
         claw.setDirection(Servo.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
@@ -157,7 +157,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             if (backButton) slowMode = false;
 
             double y = -gamepad1.left_stick_y;
-            double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
+            double x = gamepad1.left_stick_x;
             double rx = gamepad1.right_stick_x;
 
             // Denominator is the largest motor power (absolute value) or 1
