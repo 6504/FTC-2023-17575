@@ -87,10 +87,6 @@ public class CARightBlue_17 extends LinearOpMode {
     private final int LIFT_HIGH = 2000; //TODO: find actual values
 
 
-    private int coneHeight = 0; //FIND CONE STACK HEIGHT
-
-    private double openClaw =0.3;
-    private double closecLaw =0.7;
 
     private ElapsedTime     runtime = new ElapsedTime();
 
@@ -107,6 +103,15 @@ public class CARightBlue_17 extends LinearOpMode {
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 1;
     static final double     TURN_SPEED              = 1;
+     
+    static final double openClaw =0.3; 
+    static final double closeClaw =0.7;
+
+    static final double indConeHeight = 0; //TODO
+    static final double coneDiff = 0; //TODO
+    private int coneHeight =(indConeHeight + (coneDiff * conesTotal)); 
+    private int conesTotal = 5;
+
 
     public void autoLift(double liftHeight){
         lift1.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH)); 
@@ -117,7 +122,6 @@ public class CARightBlue_17 extends LinearOpMode {
         lift2.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH));
         lift2.setPower(0.5);
         lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-       // claw.setPosition(0.0); 
     }
 
     @Override
@@ -184,13 +188,13 @@ public class CARightBlue_17 extends LinearOpMode {
         claw.setPosition(openClaw); //let go of the cone
 
         encoderDrive(DRIVE_SPEED,-4.1, -4.1, -4.1, -4.1, 1.0); //move backwards
-        autoLift(0.0); //preparing to lift toward cone height
+        autoLift(coneHeight); //preparing to lift toward cone height
 
         encoderDrive(TURN_SPEED, 7.07, 7.07, -7.07, -7.07, 1.0); //move 45 degrees again toward the right direction
         encoderDrive(DRIVE_SPEED, 49.5, 49.5, 49.5, 49.5, 8.0); //
-        autoLift(coneHeight); //TODO: FIND POSITION USING STATS, lower into cone stack
-        coneHeight-=0; //minus the height by a certain amount of ticks
+        autoLift(coneHeight);
         claw.setPosition(closeClaw); //grabs cone
+        conesTotal--;
 
 
         //medium level cone
