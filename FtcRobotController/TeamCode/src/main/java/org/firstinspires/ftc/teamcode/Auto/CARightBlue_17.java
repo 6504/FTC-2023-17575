@@ -65,8 +65,8 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: CARightBT_17", group="Robot")
-public class CARightBT_17 extends LinearOpMode {
+@Autonomous(name="Robot: CARightBlue_17", group="Robot")
+public class CARightBlue_17 extends LinearOpMode {
     
     /* Declare OpMode members. */
     private DcMotor frontLeft= null;
