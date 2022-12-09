@@ -114,7 +114,7 @@ public class CARightBlue_17 extends LinearOpMode {
 
 
     public void autoLift(double liftHeight){
-        lift1.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH)); 
+        lift1.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH)); //watch out for this
         lift1.setPower(0.5);
         lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION); 
        
