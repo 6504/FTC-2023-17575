@@ -143,8 +143,9 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
         boolean dpadRight = false; // button to move lift to medium position
         boolean dpadUp = false; // button to move lift to high position
 
-        int slowMode = 0; //will tell me if i pressed it on or off
-
+        boolean slowMode = false; //will tell me if i pressed it on or off
+        boolean backButton = gamepad1.back; //slow mode
+        boolean pressStart = gamepad1.start; //fast mode / normal
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -152,8 +153,8 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             //variable for canceling auto lift
             boolean dpadLeft = gamepad1.dpad_left; // button to cancel automatic lift movement
 
-            boolean buttonY = gamepad1.y; //button to turn on slow mode 
-            if (buttonY) slowMode = 1;
+            if (pressStart) slowMode = true;
+            if (backButton) slowMode = false;
 
             double y = -gamepad1.left_stick_y;
             double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
@@ -168,7 +169,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             double frontRightPower = (y - x - rx) / denominator;
             double backRightPower = (y + x - rx) / denominator;
 
-            if (slowMode ==1){ //slow mode power
+            if (slowMode){ //slow mode power
             frontLeft.setPower((frontLeftPower)/2);
             backLeft.setPower((backLeftPower)/2);
             frontRight.setPower((frontRightPower)/2);
@@ -219,7 +220,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
-                if (slowMode ==1){ //slow mode
+                if (slowMode){ //slow mode
                 lift1.setPower((-triggerLeft)/2);
                 lift2.setPower((-triggerLeft)/2);
                 } else { //normal mode
@@ -234,7 +235,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
-                if (slowMode==1){ //slow mode
+                if (slowMode){ //slow mode
                 lift1.setPower((triggerRight)/2);
                 lift2.setPower((triggerRight)/2);
                 } else { //normal mode
@@ -261,9 +262,6 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             } else if (buttonB) {
                 claw.setPosition(0.7); //close position
             }
-            
-            //to turn slow mode off
-            if (buttonY) slowMode = 0;
 
 
 
