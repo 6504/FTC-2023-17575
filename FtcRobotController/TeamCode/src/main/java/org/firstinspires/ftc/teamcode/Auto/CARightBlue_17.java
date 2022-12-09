@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -109,8 +109,8 @@ public class CARightBlue_17 extends LinearOpMode {
 
     static final double indConeHeight = 0; //TODO
     static final double coneDiff = 0; //TODO
-    private int coneHeight =(indConeHeight + (coneDiff * conesTotal)); 
     private int conesTotal = 5;
+    private int coneHeight = (int) (indConeHeight + (coneDiff * conesTotal));
 
 
     public void autoLift(double liftHeight){
