@@ -257,9 +257,9 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
 
             // Logic for claw controls (A opens, B closes)
             if (buttonA) {
-                claw.setPosition(0.3); //TODO: find actual values
+                claw.setPosition(0.3); //open position
             } else if (buttonB) {
-                claw.setPosition(0.7); //TODO: find actual values
+                claw.setPosition(0.7); //close position
             }
             
             //to turn slow mode off
