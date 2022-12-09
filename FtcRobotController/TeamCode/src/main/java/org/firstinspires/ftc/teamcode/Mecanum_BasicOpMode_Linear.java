@@ -102,7 +102,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
     }
 
     
-    
+
 
     @Override
     public void runOpMode() {
@@ -219,7 +219,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
-                if (buttonY && slowMode ==1){ //slow mode
+                if (slowMode ==1){ //slow mode
                 lift1.setPower((-triggerLeft)/2);
                 lift2.setPower((-triggerLeft)/2);
                 } else { //normal mode
@@ -234,7 +234,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
-                if (buttonY && slowMode==1){ //slow mode
+                if (slowMode==1){ //slow mode
                 lift1.setPower((triggerRight)/2);
                 lift2.setPower((triggerRight)/2);
                 } else { //normal mode
@@ -263,7 +263,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             }
             
             //to turn slow mode off
-            if (buttonY) buttonYCounter =0;
+            if (buttonY) slowMode =0;
 
 
 
