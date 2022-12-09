@@ -143,7 +143,6 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
         boolean dpadRight = false; // button to move lift to medium position
         boolean dpadUp = false; // button to move lift to high position
 
-        boolean buttonY = gamepad1.y; //button to turn on slow mode 
         int slowMode = 0; //will tell me if i pressed it on or off
 
 
@@ -153,6 +152,8 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             //variable for canceling auto lift
             boolean dpadLeft = gamepad1.dpad_left; // button to cancel automatic lift movement
 
+            boolean buttonY = gamepad1.y; //button to turn on slow mode 
+            if (buttonY) slowMode = 1;
 
             double y = -gamepad1.left_stick_y;
             double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
@@ -167,8 +168,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             double frontRightPower = (y - x - rx) / denominator;
             double backRightPower = (y + x - rx) / denominator;
 
-            if (buttonY && slowMode ==0){ //slow mode power
-            slowMode = 1;
+            if (slowMode ==1){ //slow mode power
             frontLeft.setPower((frontLeftPower)/2);
             backLeft.setPower((backLeftPower)/2);
             frontRight.setPower((frontRightPower)/2);
@@ -263,7 +263,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             }
             
             //to turn slow mode off
-            if (buttonY) slowMode =0;
+            if (buttonY) slowMode = 0;
 
 
 
