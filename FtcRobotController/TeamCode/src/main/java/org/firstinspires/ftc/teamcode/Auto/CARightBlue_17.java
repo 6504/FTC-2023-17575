@@ -196,7 +196,6 @@ public class CARightBlue_17 extends LinearOpMode {
         claw.setPosition(closeClaw); //grabs cone
         conesTotal--;
 
-
         //medium level cone
         autoLift(LIFT_MEDIUM);// back to medium height
         encoderDrive(DRIVE_SPEED, -25.5, -25.5, -25.5, -25.5, 4.0); //goes toward medium height thing
@@ -206,13 +205,14 @@ public class CARightBlue_17 extends LinearOpMode {
 
         encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move back
         autoLift(coneHeight); //cone height
-        coneHeight-=0; //minus certain amount of tick for cone stack
+        conesTotal--; //minus certain amount of tick for cone stack
         encoderDrive(TURN_SPEED, -35.35, -35.35, 35.35, 35.35, 3.0); //turn 135 degrees tworad the cone stack
         encoderDrive(DRIVE_SPEED, 25.5, 25.5, 25.5, 25.5, 4.0); //going to cone stack
 
         //low level cone
-        autoLift(0.0); //lower to cone stack
-        claw.setPosition(0.1);
+        autoLift(coneHeight); //lower to cone stack
+        conesTotal--;
+        claw.setPosition(closeClaw);
         autoLift(LIFT_LOW); //lift cone
         encoderDrive(DRIVE_SPEED, -49.5, -49.5, -49.5, -49.5, 8.0); //go back to thing
         encoderDrive(TURN_SPEED, -7.07, -7.07, 7.07, 7.07, 1.0); //rotate 45 degrees left
@@ -220,11 +220,10 @@ public class CARightBlue_17 extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, 12, -12, 12, -12, 3.0); //go to low cone position
 
         encoderDrive(DRIVE_SPEED, 3.5, 3.5, 3.5, 3.5, 1.0); //move toward low cone position
-        claw.setPosition(0.0);//drop
+        claw.setPosition(openClaw));//drop
         encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move backwards
         encoderDrive(DRIVE_SPEED, 24, -24, 24, -24, 4.0); //parking back into the terminal
-        autoLift(0.0);
-        claw.setPosition(0.0);
+        autoLift(0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
