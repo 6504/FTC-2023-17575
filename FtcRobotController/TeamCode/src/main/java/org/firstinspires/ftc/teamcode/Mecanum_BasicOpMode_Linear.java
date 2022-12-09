@@ -89,17 +89,20 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
 
     public void autoLift(boolean dpadInput, double LIFT_POSITION){
         lift1.setTargetPosition((int)(LIFT_POSITION * COUNTS_PER_INCH));
-        lift2.setTargetPosition((int)(LIFT_POSITION* COUNTS_PER_INCH));
-        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         lift1.setPower(0.5);
+        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift2.setTargetPosition((int)(LIFT_POSITION* COUNTS_PER_INCH));
         lift2.setPower(0.5);
+        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         if ((Math.abs(lift1.getCurrentPosition()-((int)LIFT_POSITION* COUNTS_PER_INCH)) < 10) 
         || (Math.abs(lift2.getCurrentPosition()-((int)LIFT_POSITION* COUNTS_PER_INCH)) < 10)) {
              dpadInput = false;
             }
 
     }
+
+    
+    boolean buttonY = gamepad1.y; //button to turn on slow mode 
 
     @Override
     public void runOpMode() {
@@ -160,6 +163,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             double backLeftPower = (y - x + rx) / denominator;
             double frontRightPower = (y - x - rx) / denominator;
             double backRightPower = (y + x - rx) / denominator;
+
 
             frontLeft.setPower(frontLeftPower);
             backLeft.setPower(backLeftPower);
@@ -237,12 +241,13 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
 
 
 
+            //telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Claw", "Position: %.2f", claw.getPosition());
             telemetry.addData("Buttons", "A: %b, B: %b", buttonA, buttonB);
-            /*         telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("Lift1", "Position1: %d, Power1: %.2f", lift1.getCurrentPosition(), lift1.getPower());
+/*         
             telemetry.addData("LeftMotors", "frontLeft (%.2f), backLeft (%.2f)", frontLeftPower, backLeftPower);
             telemetry.addData("RightMotors", "frontRight (%.2f), backRight (%.2f)", frontRightPower, backRightPower);
-            telemetry.addData("Lift1", "Position1: %d, Power1: %.2f", lift1.getCurrentPosition(), lift1.getPower());
             telemetry.addData("Lift2", "Position2: %d, Power2: %.2f", lift2.getCurrentPosition(), lift2.getPower());
             telemetry.addData("DPad", "Up: %b, Down: %b, Left: %b, Right: %b", dpadUp, dpadDown, dpadLeft, dpadRight);
 */

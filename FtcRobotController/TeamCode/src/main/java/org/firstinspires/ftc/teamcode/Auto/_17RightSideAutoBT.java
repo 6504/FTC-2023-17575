@@ -104,14 +104,14 @@ public class _17RightSideAutoBT extends LinearOpMode {
     static final double     TURN_SPEED              = 1;
 
     public void autoLift(double liftHeight){
-        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION); //this order is needed
-        lift1.setPower(0.5);
         lift1.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH)); 
+        lift1.setPower(0.5);
+        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION); 
        
        
-        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        lift2.setPower(0.5);
         lift2.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH));
+        lift2.setPower(0.5);
+        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
        // claw.setPosition(0.0); 
     }
 
