@@ -87,15 +87,15 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
 
-    public void autoLift(boolean dpadInput, double LIFT_POSITION){
-        lift1.setTargetPosition((int)(LIFT_POSITION * COUNTS_PER_INCH));
+    public void autoLift(boolean dpadInput, int LIFT_POSITION){
+        lift1.setTargetPosition(LIFT_POSITION);
         lift1.setPower(0.5);
         lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        lift2.setTargetPosition((int)(LIFT_POSITION* COUNTS_PER_INCH));
+        lift2.setTargetPosition(LIFT_POSITION);
         lift2.setPower(0.5);
         lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        if ((Math.abs(lift1.getCurrentPosition()-((int)LIFT_POSITION* COUNTS_PER_INCH)) < 10) 
-        || (Math.abs(lift2.getCurrentPosition()-((int)LIFT_POSITION* COUNTS_PER_INCH)) < 10)) {
+        if ((Math.abs(lift1.getCurrentPosition()-(LIFT_POSITION)) < 10) 
+        || (Math.abs(lift2.getCurrentPosition()-(LIFT_POSITION) < 10)) {
              dpadInput = false;
             }
 
@@ -235,8 +235,8 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
                 lift1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                 lift2.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
-                lift1.setPower((triggerRight)*.2);
-                lift2.setPower((triggerRight)*.2);
+                lift1.setPower(triggerRight);
+                lift2.setPower(triggerRight);
             } else {
                 /*lift1.setTargetPosition(lift1.getTargetPosition());
                 lift1.setPower(1);
@@ -259,9 +259,9 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
 
             // Logic for claw controls (A opens, B closes)
             if (buttonA) {
-                claw.setPosition(0.3); //open position
+                claw.setPosition(0.35); //open position
             } else if (buttonB) {
-                claw.setPosition(0.7); //close position
+                claw.setPosition(0.65); //close position
             }
 
 
