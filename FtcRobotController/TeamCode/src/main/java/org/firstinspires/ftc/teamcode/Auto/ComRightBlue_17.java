@@ -109,8 +109,8 @@ public class ComRightBlue_17 extends LinearOpMode {
     static final double openClaw =0.35; 
     static final double closeClaw =0.65;
 
-    static final double indConeHeight = 0; //TODO
-    static final double coneDiff = 0; //TODO
+    static final double indConeHeight = 730; //TODO
+    static final double coneDiff = 400; //TODO
     private int conesTotal = 5;
     private int coneHeight = (int) (indConeHeight + (coneDiff * conesTotal));
 
@@ -248,9 +248,8 @@ public class ComRightBlue_17 extends LinearOpMode {
 
 
         //near end of match
-        encoderDrive(DRIVE_SPEED, -12, 12, 12, -12, 3.0);
-        encoderDrive(DRIVE_SPEED, 48, 48, 48, 48, 8.0);
-        encoderDrive(DRIVE_SPEED, 48, -48, -48, 48, 8.0); // +2 points
+        encoderDrive(DRIVE_SPEED, 36, -36, -36, 36, 4.0);
+        encoderDrive(DRIVE_SPEED, 48, 48, 48, 48, 3.0); // +2 points
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

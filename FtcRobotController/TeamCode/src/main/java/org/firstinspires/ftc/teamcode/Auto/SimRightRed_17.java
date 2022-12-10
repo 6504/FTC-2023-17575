@@ -107,8 +107,8 @@ public class SimRightRed_17 extends LinearOpMode {
     static final double openClaw =0.35; 
     static final double closeClaw =0.65;
 
-    static final double indConeHeight = 0; //TODO
-    static final double coneDiff = 0; //TODO
+    static final double indConeHeight = 730; //TODO
+    static final double coneDiff = 400; //TODO
     private int conesTotal = 5;
     private int coneHeight = (int) (indConeHeight + (coneDiff * conesTotal));
 
@@ -189,14 +189,23 @@ public class SimRightRed_17 extends LinearOpMode {
         // encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         claw.setPosition(closeClaw);
-        encoderDrive(DRIVE_SPEED, -12, 12, 12, -12, 2.0); //move toward right to low pole
-        autoLift(LIFT_LOW);
-        encoderDrive(DRIVE_SPEED, 3, 3, 3, 3, 1.0);
-        sleep(500);
-        claw.setPosition(openClaw); //drop into low pole cone
+        encoderDrive(DRIVE_SPEED, -24, 24, 24, -24, 3.0); //drive to the left inner close to substation
+        encoderDrive(DRIVE_SPEED, 36, 36, 36, 36, 4.0); //drive up to the large height, 48 
+        encoderDrive(TURN_SPEED, ND, ND, -ND, -ND, 3.0); //turn 90 degrees toward cone stack
+        
+        //medium 1
+        autoLift(LIFT_MEDIUM);  //medium pole
+        sleep(500); 
+        encoderDrive(DRIVE_SPEED, 3, 3, 3, 3, 2.0);
+        sleep(1000);
+        claw.setPosition(openClaw); //let go +4 points
+        encoderDrive(DRIVE_SPEED, -3, -3, -3, -3, 2.0);
+        autoLift(coneHeight);
+        conesTotal--;
 
-        encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move backwards
-        encoderDrive(DRIVE_SPEED, -32, 32, 32, -32, .0); //parking back into the terminal
+
+        encoderDrive(DRIVE_SPEED, 36, -36, -36, 36, 4.0);
+        encoderDrive(-12, -12, -12, -12, 2.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
