@@ -161,8 +161,8 @@ public class ComRightBlue_17 extends LinearOpMode {
         lift2.setDirection(DcMotor.Direction.FORWARD);
         claw.setDirection(Servo.Direction.FORWARD);
 
-        // leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        // rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lift1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lift2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

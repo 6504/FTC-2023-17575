@@ -250,7 +250,11 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             }
 
 
-
+            //reset encoder position to 0
+            if (gamepad1.left_bumper){
+                lift1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                lift2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            }
 
 
             // variables for claw control
