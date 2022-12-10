@@ -95,7 +95,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
         lift2.setPower(0.5);
         lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         if ((Math.abs(lift1.getCurrentPosition()-(LIFT_POSITION)) < 10) 
-        || (Math.abs(lift2.getCurrentPosition()-(LIFT_POSITION) < 10))) {
+        || (Math.abs(lift2.getCurrentPosition()-(LIFT_POSITION)) < 10)) {
              dpadInput = false;
             }
 
@@ -259,7 +259,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
 
             // Logic for claw controls (A opens, B closes)
             if (buttonA) {
-                claw.setPosition(0.35); //open position
+                claw.setPosition(0.25); //open position
             } else if (buttonB) {
                 claw.setPosition(0.65); //close position
             }
