@@ -107,6 +107,9 @@ public class SimRightBlue_17 extends LinearOpMode {
     static final double openClaw =0.35; 
     static final double closeClaw =0.65;
 
+    static final double ND = 14.15; //ninety degrees
+
+
     static final double indConeHeight = 730; //TODO
     static final double coneDiff = 400; //TODO
     private int conesTotal = 5;
@@ -203,7 +206,7 @@ public class SimRightBlue_17 extends LinearOpMode {
         conesTotal--;
 
         
-        encoderDrive(DRIVE_SPEED, 32, -32, -32, 32, 4.0); //parking back into the terminal
+        encoderDrive(DRIVE_SPEED, 35, -35, -35, 35, 4.0); //parking back into the terminal
         encoderDrive(48, 48, 48, 48, 4.0);
         
         telemetry.addData("Path", "Complete");

@@ -105,6 +105,8 @@ public class SimLeftRed_17 extends LinearOpMode {
     static final double openClaw =0.35; 
     static final double closeClaw =0.65;
 
+    static final double ND = 14.15; //ninety degrees
+
     static final double indConeHeight = 730; //TODO
     static final double coneDiff = 400; //TODO
     private int conesTotal = 5;
