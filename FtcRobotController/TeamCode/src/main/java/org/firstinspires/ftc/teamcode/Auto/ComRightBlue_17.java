@@ -189,7 +189,7 @@ public class ComRightBlue_17 extends LinearOpMode {
         // encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         claw.setPosition(closeClaw);
-        autoLiftUP(1000);
+        //autoLiftUP(1000);
         //sleep(1000);
 
         encoderDrive(DRIVE_SPEED, -24, 24, 24, -24, 3.0); //drive to the left inner close to substation
@@ -219,7 +219,7 @@ public class ComRightBlue_17 extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, 12, -12, -12, 12, 3.0);
 
         encoderDrive(DRIVE_SPEED, 3, 3, 3, 3, 2.0);
-        sleep(1000):
+        sleep(1000);
         claw.setPosition(openClaw); //let go +4 points
 
         encoderDrive(DRIVE_SPEED, -3, -3, -3, -3, 2.0);
@@ -239,7 +239,7 @@ public class ComRightBlue_17 extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, 12, -12, -12, 12, 3.0);
 
         encoderDrive(DRIVE_SPEED, 3, 3, 3, 3, 2.0);
-        sleep(1000):
+        sleep(1000);
         claw.setPosition(openClaw); //let go +4 points
 
         encoderDrive(DRIVE_SPEED, -3, -3, -3, -3, 2.0);
