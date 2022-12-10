@@ -104,6 +104,8 @@ public class ComRightBlue_17 extends LinearOpMode {
     static final double     DRIVE_SPEED             = 1;
     static final double     TURN_SPEED              = 1;
      
+    static final double ND = 14.15; //ninety degrees
+
     static final double openClaw =0.3; 
     static final double closeClaw =0.7;
 
@@ -204,7 +206,7 @@ public class ComRightBlue_17 extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, 3.5, 3.5, 3.5, 3.5, 1.0); //drive up a little
         encoderDrive(DRIVE_SPEED, -24, 24, 24, -24, 3.0); //drive to the left inner close to substation
         encoderDrive(DRIVE_SPEED, 46, 46, 46, 46, 4.0); //drive up to the large height, 48 
-        encoderDrive(TURN_SPEED, 14.15, 14.15, -14.15, -14.15, 2.5); //turn 90 degrees toward cone stack
+        encoderDrive(TURN_SPEED, ND, ND, -ND, -ND, 2.5); //turn 90 degrees toward cone stack
         autoLiftUP(LIFT_MEDIUM);  
         sleep(1500);
         encoderDrive(DRIVE_SPEED, 2, 2, 2, 2, 1.0);
@@ -225,13 +227,13 @@ public class ComRightBlue_17 extends LinearOpMode {
         autoLiftUP(LIFT_MEDIUM);// back to medium height
         sleep(1000);
         encoderDrive(DRIVE_SPEED, -37, -37, -37, -37, 4.0); //goes toward medium height thing 24 +12+ 3.5
-        encoderDrive(TURN_SPEED, 14.15, 14.15, -14.15, -14.15, 2.5); //rotate 90 degrees
+        encoderDrive(TURN_SPEED, ND, ND, -ND, -ND, 2.5); //rotate 90 degrees
         encoderDrive(DRIVE_SPEED, 2, 2, 2, 2, 1.0); //move toward thing around 3.5
         sleep(1000)
         claw.setPosition(openClaw); //drop
 
         encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move back
-        encoderDrive(TURN_SPEED, -14.15, -14.15, 14.15, 14.15, 2.5); //turn 90 degrees tworad the cone stack
+        encoderDrive(TURN_SPEED, -ND, -ND, ND, ND, 2.5); //turn 90 degrees tworad the cone stack
         encoderDrive(DRIVE_SPEED, 37, 37, 37, 37, 3.5); //going to cone stack
         sleep(3500);
 
@@ -243,7 +245,7 @@ public class ComRightBlue_17 extends LinearOpMode {
         autoLiftUP(LIFT_LOW); //lift cone
         sleep(500);
         encoderDrive(DRIVE_SPEED, -39.5, -39.5, -39.5, -39.5, 4.0); //go back to thing
-        encoderDrive(TURN_SPEED, -14.15, -14.15, 14.15, 14.15, 2.5); //rotate 90 degrees left
+        encoderDrive(TURN_SPEED, -ND, -ND, ND, ND, 2.5); //rotate 90 degrees left
         encoderDrive(DRIVE_SPEED, -50.5, -50.5, -50.5, -50.5, 4.0); //go back to near starting thing
         encoderDrive(DRIVE_SPEED, 12, -12, -12, 12, 2.0); //go to low cone position
 
