@@ -113,27 +113,17 @@ public class SimRightBlue_17 extends LinearOpMode {
     private int coneHeight = (int) (indConeHeight + (coneDiff * conesTotal));
 
 
-    public void autoLiftUP(double liftHeight){
+    public void autoLift(double liftHeight){
         lift1.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH)); //watch out for this
-        lift1.setPower(0.75);
+        lift1.setPower(1.0);
         lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION); 
        
        
         lift2.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH));
-        lift2.setPower(0.75);
+        lift2.setPower(1.0);
         lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
     }
 
-    public void autoLiftDOWN(double liftHeight){
-        lift1.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH)); //watch out for this
-        lift1.setPower(0.4);
-        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION); 
-       
-       
-        lift2.setTargetPosition((int)(liftHeight * COUNTS_PER_INCH));
-        lift2.setPower(0.4);
-        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-    }
 
 
         //2ft/sec
@@ -201,14 +191,13 @@ public class SimRightBlue_17 extends LinearOpMode {
 
         claw.setPosition(closeClaw);
         encoderDrive(DRIVE_SPEED, -12, 12, -12, 12, 2.0);
-        autoLiftUP(LIFT_LOW);
+        autoLift(LIFT_LOW);
         encoderDrive(DRIVE_SPEED, 3, 3, 3, 3, 1.0);
         sleep(500);
         claw.setPosition(openClaw); //drop into low pole cone
 
         encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move backwards
         encoderDrive(DRIVE_SPEED, 32, -32, -32, 32, 2.0); //parking back into the terminal
-        autoLiftDOWN(0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
