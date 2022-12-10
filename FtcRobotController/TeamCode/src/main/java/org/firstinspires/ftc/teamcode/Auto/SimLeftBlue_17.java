@@ -65,8 +65,8 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: SimRightBlue_17", group="Robot")
-public class SimRightBlue_17 extends LinearOpMode {
+@Autonomous(name="Robot: SimLeftBlue_17", group="Robot")
+public class SimLeftBlue_17 extends LinearOpMode {
     
     /* Declare OpMode members. */
     private DcMotor frontLeft= null;
@@ -85,8 +85,6 @@ public class SimRightBlue_17 extends LinearOpMode {
     private final int LIFT_LOW = 0; //TODO: find actual values
     private final int LIFT_MEDIUM = 6000; //TODO: find actual values
     private final int LIFT_HIGH = 7500; //TODO: find actual values
-
-
 
     private ElapsedTime     runtime = new ElapsedTime();
 
@@ -189,14 +187,14 @@ public class SimRightBlue_17 extends LinearOpMode {
         // encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         claw.setPosition(closeClaw);
-        encoderDrive(DRIVE_SPEED, -12, 12, 12, -12, 2.0); //move toward right to low pole
+        encoderDrive(DRIVE_SPEED, 12, -12, -12, 12, 2.0);
         autoLift(LIFT_LOW);
         encoderDrive(DRIVE_SPEED, 3, 3, 3, 3, 1.0);
         sleep(500);
         claw.setPosition(openClaw); //drop into low pole cone
 
         encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move backwards
-        encoderDrive(DRIVE_SPEED, -32, 32, 32, -32, .0); //parking back into the terminal
+        encoderDrive(DRIVE_SPEED, 32, -32, -32, 32, 3.0); //parking back into the terminal
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

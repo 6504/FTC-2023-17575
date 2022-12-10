@@ -249,7 +249,7 @@ public class ComRightBlue_17 extends LinearOpMode {
 
         //near end of match
         encoderDrive(DRIVE_SPEED, -12, 12, 12, -12, 3.0);
-        encoderDrive(DRIVE_SPEED, 48, 48, 50, 48, 8.0);
+        encoderDrive(DRIVE_SPEED, 48, 48, 48, 48, 8.0);
         encoderDrive(DRIVE_SPEED, 48, -48, -48, 48, 8.0); // +2 points
 
         telemetry.addData("Path", "Complete");

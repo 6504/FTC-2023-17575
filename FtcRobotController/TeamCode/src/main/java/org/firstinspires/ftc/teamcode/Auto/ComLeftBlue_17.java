@@ -65,8 +65,8 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: SimRightBlue_17", group="Robot")
-public class SimRightBlue_17 extends LinearOpMode {
+@Autonomous(name="Robot: ComLeftBlue_17", group="Robot")
+public class ComLeftBlue_17 extends LinearOpMode {
     
     /* Declare OpMode members. */
     private DcMotor frontLeft= null;
@@ -104,6 +104,8 @@ public class SimRightBlue_17 extends LinearOpMode {
     static final double     DRIVE_SPEED             = 1;
     static final double     TURN_SPEED              = 1;
      
+    static final double ND = 14.15; //ninety degrees
+
     static final double openClaw =0.35; 
     static final double closeClaw =0.65;
 
@@ -122,8 +124,6 @@ public class SimRightBlue_17 extends LinearOpMode {
         lift2.setPower(1.0);
         lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
     }
-
-
 
         //2ft/sec
 
@@ -189,14 +189,67 @@ public class SimRightBlue_17 extends LinearOpMode {
         // encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         claw.setPosition(closeClaw);
-        encoderDrive(DRIVE_SPEED, -12, 12, 12, -12, 2.0); //move toward right to low pole
-        autoLift(LIFT_LOW);
-        encoderDrive(DRIVE_SPEED, 3, 3, 3, 3, 1.0);
-        sleep(500);
-        claw.setPosition(openClaw); //drop into low pole cone
+        //autoLiftUP(1000);
+        //sleep(1000);
 
-        encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move backwards
-        encoderDrive(DRIVE_SPEED, -32, 32, 32, -32, .0); //parking back into the terminal
+        encoderDrive(DRIVE_SPEED, 24, -24, -24, 24, 3.0); //values inverse
+        encoderDrive(DRIVE_SPEED, 36, 36, 36, 36, 4.0); //drive up to the large height, 48 
+        encoderDrive(TURN_SPEED, -ND, -ND, ND, ND, 3.0); //values inverse
+        
+        //medium 1
+        autoLift(LIFT_MEDIUM);  //medium pole
+        sleep(500); 
+        encoderDrive(DRIVE_SPEED, 3, 3, 3, 3, 2.0);
+        sleep(1000);
+        claw.setPosition(openClaw); //let go +4 points
+        encoderDrive(DRIVE_SPEED, -3, -3, -3, -3, 2.0);
+        autoLift(coneHeight);
+        conesTotal--;
+
+        encoderDrive(DRIVE_SPEED, 12, -12, -12, 12, 3.0); //values inverse
+        encoderDrive(DRIVE_SPEED, 50, 50, 50, 50, 8.0); //go toward cone stack
+        sleep(4000);
+        claw.setPosition(closeClaw); //get next cone
+        sleep(500);
+        autoLift(coneHeight*2);
+        sleep(1000);
+
+        //medium 2
+        encoderDrive(DRIVE_SPEED, -50, -50, -50, -50, 8.0);
+        encoderDrive(DRIVE_SPEED, -12, 12, 12, -12, 3.0);
+
+        encoderDrive(DRIVE_SPEED, 3, 3, 3, 3, 2.0);
+        sleep(1000);
+        claw.setPosition(openClaw); //let go +4 points
+
+        encoderDrive(DRIVE_SPEED, -3, -3, -3, -3, 2.0);
+        autoLift(coneHeight);
+        conesTotal--;
+
+        encoderDrive(DRIVE_SPEED, 12, -12, -12, 12, 3.0);
+        encoderDrive(DRIVE_SPEED, 50, 50, 50, 50, 8.0);
+        sleep(4000);
+        claw.setPosition(closeClaw); //get next cone
+        sleep(500);
+        autoLift(coneHeight*2);
+        sleep(1000);
+
+        //medium 3
+        encoderDrive(DRIVE_SPEED, -50, -50, -50, -50, 8.0);
+        encoderDrive(DRIVE_SPEED, 12, -12, -12, 12, 3.0);
+
+        encoderDrive(DRIVE_SPEED, 3, 3, 3, 3, 2.0);
+        sleep(1000);
+        claw.setPosition(openClaw); //let go +4 points
+
+        encoderDrive(DRIVE_SPEED, -3, -3, -3, -3, 2.0);
+        autoLift(coneHeight);
+        conesTotal--;
+
+
+        //near end of match
+        encoderDrive(DRIVE_SPEED, -36, 36, 36, -36, 4.0);
+        encoderDrive(DRIVE_SPEED, -12, -12, -12, -12, 3.0); // +2 points
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
