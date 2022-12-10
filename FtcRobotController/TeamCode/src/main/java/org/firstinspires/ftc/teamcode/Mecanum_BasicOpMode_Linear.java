@@ -95,7 +95,7 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
         lift2.setPower(0.5);
         lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         if ((Math.abs(lift1.getCurrentPosition()-(LIFT_POSITION)) < 10) 
-        || (Math.abs(lift2.getCurrentPosition()-(LIFT_POSITION) < 10)) {
+        || (Math.abs(lift2.getCurrentPosition()-(LIFT_POSITION) < 10))) {
              dpadInput = false;
             }
 
