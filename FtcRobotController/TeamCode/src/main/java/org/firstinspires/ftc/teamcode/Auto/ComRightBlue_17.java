@@ -201,23 +201,20 @@ public class ComRightBlue_17 extends LinearOpMode {
 
         claw.setPosition(closeClaw);
 
-        //high level cone 
         encoderDrive(DRIVE_SPEED, 3.5, 3.5, 3.5, 3.5, 1.0); //drive up a little
         encoderDrive(DRIVE_SPEED, -24, 24, 24, -24, 3.0); //drive to the left inner close to substation
-        encoderDrive(DRIVE_SPEED, 50.5, 50.5, 50.5, 50.5, 4.0); //drive up to the large height, 48 +3.5
-        autoLiftUP(LIFT_HIGH);  
-        encoderDrive(DRIVE_SPEED, 12, -12, -12, 12, 2.0); //go to the right toward the high pole
-       // encoderDrive(DRIVE_SPEED, 4.1, 4.1, 4.1, 4.1, 1.0); //drives twoard the high level
-       // encoderDrive(TURN_SPEED, 7.07, 7.07, -7.07, -7.07, 1.0); //turn 45 degrees toward large thing
-        sleep(2000);
-        claw.setPosition(openClaw); //let go of the cone
-
-
-        encoderDrive(DRIVE_SPEED,-3.5, -3.5, -3.5, -3.5, 1.0); //move backwards
+        encoderDrive(DRIVE_SPEED, 46, 46, 46, 46, 4.0); //drive up to the large height, 48 
         encoderDrive(TURN_SPEED, 14.15, 14.15, -14.15, -14.15, 2.5); //turn 90 degrees toward cone stack
+        autoLiftUP(LIFT_MEDIUM);  
+        sleep(1500);
+        encoderDrive(DRIVE_SPEED, 2, 2, 2, 2, 1.0);
+        sleep(500);
+        claw.setPosition(openClaw); //let go
+        encoderDrive(DRIVE_SPEED, -2, -2, -2, -2, 1.0);
 
-        // encoderDrive(TURN_SPEED, 7.07, 7.07, -7.07, -7.07, 1.0); //move 45 degrees again toward the right direction
+        encoderDrive(DRIVE_SPEED, -12, 12, 12, -12, 2.0); //go to the left 
         encoderDrive(DRIVE_SPEED, 37, 37, 37, 37, 3.5); //go toward cone 12+ 24+ 3.5
+        
         sleep(3300);
         autoLiftDOWN(coneHeight); //preparing to lift toward cone height
         sleep(2000)
