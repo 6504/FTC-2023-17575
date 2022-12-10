@@ -103,7 +103,9 @@ public class SimRightRed_17 extends LinearOpMode {
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 1;
     static final double     TURN_SPEED              = 1;
-     
+
+    static final double ND = 14.15; //ninety degrees
+
     static final double openClaw =0.35; 
     static final double closeClaw =0.65;
 
