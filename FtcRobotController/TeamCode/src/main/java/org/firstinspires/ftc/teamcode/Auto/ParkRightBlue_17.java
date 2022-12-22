@@ -65,8 +65,8 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: SimLeftRed_17", group="Robot")
-public class SimLeftRed_17 extends LinearOpMode {
+@Autonomous(name="Robot: ParkRightBlue_17", group="Robot")
+public class ParkRightBlue_17 extends LinearOpMode {
     
     /* Declare OpMode members. */
     private DcMotor frontLeft= null;
@@ -85,6 +85,8 @@ public class SimLeftRed_17 extends LinearOpMode {
     private final int LIFT_LOW = 0; //TODO: find actual values
     private final int LIFT_MEDIUM = 6000; //TODO: find actual values
     private final int LIFT_HIGH = 7500; //TODO: find actual values
+
+
 
     private ElapsedTime     runtime = new ElapsedTime();
 
@@ -106,6 +108,7 @@ public class SimLeftRed_17 extends LinearOpMode {
     static final double closeClaw =0.25;
 
     static final double ND = 14.15; //ninety degrees
+
 
     static final double indConeHeight = 730; //TODO
     static final double coneDiff = 400; //TODO
@@ -190,22 +193,8 @@ public class SimLeftRed_17 extends LinearOpMode {
 
         claw.setPosition(closeClaw);
         sleep(1000);
-        encoderDrive(DRIVE_SPEED, 24, -24, -24, 24, 3.0); //values inverse
-        encoderDrive(DRIVE_SPEED, 36, 36, 36, 36, 4.0); //drive up to the large height, 48 
-        encoderDrive(TURN_SPEED, -ND, -ND, ND, ND, 3.0); //values inverse
-        
-        //medium 1
-        autoLift(LIFT_MEDIUM);  //medium pole
-        sleep(500); 
-        encoderDrive(DRIVE_SPEED, 3.5, 3.5, 3.5, 3.5, 2.0);
-        sleep(1000);
-        claw.setPosition(openClaw); //let go +4 points
-
-        encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move backwards
-
-
-        encoderDrive(DRIVE_SPEED, -36, 36, 36, -36, 4.0);
-        encoderDrive(DRIVE_SPEED, 48, 48, 48, 48, 3.0); // +2 points
+        encoderDrive(DRIVE_SPEED, 24, -24, -24, 24, 4.0);
+        autoLift(LIFT_MEDIUM);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

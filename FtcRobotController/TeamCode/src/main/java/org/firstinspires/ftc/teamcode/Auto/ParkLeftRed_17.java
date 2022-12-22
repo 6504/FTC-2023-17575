@@ -65,8 +65,8 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: SimLeftRed_17", group="Robot")
-public class SimLeftRed_17 extends LinearOpMode {
+@Autonomous(name="Robot: ParkLeftRed_17", group="Robot")
+public class ParkLeftRed_17 extends LinearOpMode {
     
     /* Declare OpMode members. */
     private DcMotor frontLeft= null;
@@ -190,22 +190,9 @@ public class SimLeftRed_17 extends LinearOpMode {
 
         claw.setPosition(closeClaw);
         sleep(1000);
-        encoderDrive(DRIVE_SPEED, 24, -24, -24, 24, 3.0); //values inverse
-        encoderDrive(DRIVE_SPEED, 36, 36, 36, 36, 4.0); //drive up to the large height, 48 
-        encoderDrive(TURN_SPEED, -ND, -ND, ND, ND, 3.0); //values inverse
-        
-        //medium 1
-        autoLift(LIFT_MEDIUM);  //medium pole
-        sleep(500); 
-        encoderDrive(DRIVE_SPEED, 3.5, 3.5, 3.5, 3.5, 2.0);
-        sleep(1000);
-        claw.setPosition(openClaw); //let go +4 points
 
-        encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move backwards
-
-
-        encoderDrive(DRIVE_SPEED, -36, 36, 36, -36, 4.0);
-        encoderDrive(DRIVE_SPEED, 48, 48, 48, 48, 3.0); // +2 points
+        encoderDrive(DRIVE_SPEED, -26, 26, 26, -26, 4.0); // +2 points
+        autoLift(LIFT_MEDIUM);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

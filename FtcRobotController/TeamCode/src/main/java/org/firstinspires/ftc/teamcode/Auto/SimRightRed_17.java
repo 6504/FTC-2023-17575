@@ -106,8 +106,8 @@ public class SimRightRed_17 extends LinearOpMode {
 
     static final double ND = 14.15; //ninety degrees
 
-    static final double openClaw =0.35; 
-    static final double closeClaw =0.65;
+    static final double openClaw =0.65; 
+    static final double closeClaw =0.25;
 
     static final double indConeHeight = 730; //TODO
     static final double coneDiff = 400; //TODO
@@ -191,6 +191,7 @@ public class SimRightRed_17 extends LinearOpMode {
         // encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         claw.setPosition(closeClaw);
+        sleep(1000);
         encoderDrive(DRIVE_SPEED, -24, 24, 24, -24, 3.0); //drive to the left inner close to substation
         encoderDrive(DRIVE_SPEED, 36, 36, 36, 36, 4.0); //drive up to the large height, 48 
         encoderDrive(TURN_SPEED, ND, ND, -ND, -ND, 3.0); //turn 90 degrees toward cone stack
@@ -207,7 +208,7 @@ public class SimRightRed_17 extends LinearOpMode {
 
 
         encoderDrive(DRIVE_SPEED, 36, -36, -36, 36, 4.0);
-        encoderDrive(-12, -12, -12, -12, 2.0);
+        encoderDrive(DRIVE_SPEED, -12, -12, -12, -12, 2.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

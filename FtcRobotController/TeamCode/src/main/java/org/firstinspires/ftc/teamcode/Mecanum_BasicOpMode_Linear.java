@@ -261,11 +261,11 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
             boolean buttonA = gamepad1.a;
             boolean buttonB = gamepad1.b;
 
-            // Logic for claw controls (A opens, B closes)
+            // Logic for claw controls (A close, B opens)
             if (buttonA) {
-                claw.setPosition(0.25); //open position
+                claw.setPosition(0.25); //close position
             } else if (buttonB) {
-                claw.setPosition(0.65); //close position
+                claw.setPosition(0.65); //opens position
             }
 
 

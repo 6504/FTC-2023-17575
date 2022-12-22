@@ -104,8 +104,8 @@ public class SimLeftBlue_17 extends LinearOpMode {
 
     static final double ND = 14.15; //ninety degrees
 
-    static final double openClaw =0.35; 
-    static final double closeClaw =0.65;
+    static final double openClaw =0.65; 
+    static final double closeClaw =0.25;
     
     static final double indConeHeight = 730; //TODO
     static final double coneDiff = 400; //TODO
@@ -189,7 +189,7 @@ public class SimLeftBlue_17 extends LinearOpMode {
         // encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         claw.setPosition(closeClaw);
-
+        sleep(1000);
         encoderDrive(DRIVE_SPEED, 24, -24, -24, 24, 3.0); //values inverse
         encoderDrive(DRIVE_SPEED, 36, 36, 36, 36, 4.0); //drive up to the large height, 48 
         encoderDrive(TURN_SPEED, -ND, -ND, ND, ND, 3.0); //values inverse
