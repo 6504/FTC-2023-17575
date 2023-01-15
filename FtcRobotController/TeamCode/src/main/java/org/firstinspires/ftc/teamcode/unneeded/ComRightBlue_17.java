@@ -66,6 +66,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @Autonomous(name="Robot: ComRightBlue_17", group="Robot")
+@Disabled()
 public class ComRightBlue_17 extends LinearOpMode {
     
     /* Declare OpMode members. */

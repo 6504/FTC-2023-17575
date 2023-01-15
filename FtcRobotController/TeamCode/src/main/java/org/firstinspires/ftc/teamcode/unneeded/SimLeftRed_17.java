@@ -65,8 +65,9 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: SimLeftBlue_17", group="Robot")
-public class SimLeftBlue_17 extends LinearOpMode {
+@Autonomous(name="Robot: SimLeftRed_17", group="Robot")
+@Disabled()
+public class SimLeftRed_17 extends LinearOpMode {
     
     /* Declare OpMode members. */
     private DcMotor frontLeft= null;
@@ -101,12 +102,12 @@ public class SimLeftBlue_17 extends LinearOpMode {
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 1;
     static final double     TURN_SPEED              = 1;
+     
+    static final double openClaw =0.65; 
+    static final double closeClaw =0.25;
 
     static final double ND = 14.15; //ninety degrees
 
-    static final double openClaw =0.65; 
-    static final double closeClaw =0.25;
-    
     static final double indConeHeight = 730; //TODO
     static final double coneDiff = 400; //TODO
     private int conesTotal = 5;
@@ -205,7 +206,7 @@ public class SimLeftBlue_17 extends LinearOpMode {
 
 
         encoderDrive(DRIVE_SPEED, -36, 36, 36, -36, 4.0);
-        encoderDrive(DRIVE_SPEED, -12, -12, -12, -12, 3.0); // +2 points
+        encoderDrive(DRIVE_SPEED, 48, 48, 48, 48, 3.0); // +2 points
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

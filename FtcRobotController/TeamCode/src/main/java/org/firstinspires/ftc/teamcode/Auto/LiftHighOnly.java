@@ -27,17 +27,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Auto;
+package org.firstinspires;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
@@ -65,28 +63,28 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: SimLeftRed_17", group="Robot")
-public class SimLeftRed_17 extends LinearOpMode {
-    
+@Autonomous(name="Robot: LiftHighOnly", group="Robot")
+public class LiftHighOnly extends LinearOpMode {
+
     /* Declare OpMode members. */
     private DcMotor frontLeft= null;
     private DcMotor frontRight = null;
     private DcMotor backLeft = null;
     private DcMotor backRight = null;
-    public static final double NEW_P = 2.5;
-    public static final double NEW_I = 0.1;
-    public static final double NEW_D = 0.2;
-    public static final double NEW_F = 0.5;
 
-    private DcMotorEx lift1;
-    private DcMotorEx lift2;
-    private Servo claw;
-
-    private final int LIFT_LOW = 0; //TODO: find actual values
-    private final int LIFT_MEDIUM = 6000; //TODO: find actual values
-    private final int LIFT_HIGH = 7500; //TODO: find actual values
+    private DcMotorEx lift = null;
+    private Servo claw = null;
 
     private ElapsedTime     runtime = new ElapsedTime();
+
+    private final int individualConeHeight = 500; //TODO: find actual values 
+    private int coneStackHeight = individualConeHeight * 5; //TODO: find actual values
+    private int remainingCones = 5; 
+
+    private final int LIFT_LOW = 0; 
+    private final int LIFT_MEDIUM = 6000; 
+    private final int LIFT_HIGH = 7800; 
+
 
     // Calculate the COUNTS_PER_INCH for your specific drive train.
     // Go to your motor vendor website to determine your motor's COUNTS_PER_MOTOR_REV
@@ -100,42 +98,11 @@ public class SimLeftRed_17 extends LinearOpMode {
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 1;
-    static final double     TURN_SPEED              = 1;
-     
-    static final double openClaw =0.65; 
-    static final double closeClaw =0.25;
+    static final double     TURN_SPEED              = 0.5;
 
-    static final double ND = 14.15; //ninety degrees
-
-    static final double indConeHeight = 730; //TODO
-    static final double coneDiff = 400; //TODO
-    private int conesTotal = 5;
-    private int coneHeight = (int) (indConeHeight + (coneDiff * conesTotal));
-
-
-    public void autoLift(int liftHeight){
-        lift1.setTargetPosition(liftHeight); 
-        lift1.setPower(1.0);
-        lift1.setMode(DcMotorEx.RunMode.RUN_TO_POSITION); 
-       
-        lift2.setTargetPosition(liftHeight);
-        lift2.setPower(1.0);
-        lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-    }
-
-
-
-        //2ft/sec
-
-        //length 17 in
-        //width 17 in
-        //radius 9 inch
-        //7.07 in for 45 degrees
-        //35.35 in for 135 degrees
-        //24 inch for one square
-        //4.4 seconds for full revolution of 15 team, assume heavier
-        //3.5 from square for center
-
+    static final double     CLAW_CLOSE_POSITION     = 0.35;
+    static final double     CLAW_OPEN_POSITION      = 0.65;
+    
     @Override
     public void runOpMode() {
 
@@ -144,9 +111,8 @@ public class SimLeftRed_17 extends LinearOpMode {
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        lift1 = hardwareMap.get(DcMotorEx.class, "lift1");
-        lift2 = hardwareMap.get(DcMotorEx.class, "lift2");
 
+        lift = hardwareMap.get(DcMotorEx.class, "lift");
         claw = hardwareMap.get(Servo.class, "claw");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -157,12 +123,11 @@ public class SimLeftRed_17 extends LinearOpMode {
         frontRight.setDirection(DcMotor.Direction.FORWARD);
         backRight.setDirection(DcMotor.Direction.FORWARD);
 
-        lift1.setDirection(DcMotor.Direction.FORWARD);
-        lift2.setDirection(DcMotor.Direction.FORWARD);
+        lift.setDirection(DcMotor.Direction.FORWARD);
         claw.setDirection(Servo.Direction.FORWARD);
 
-        lift1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        lift2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        // rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         // rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -172,44 +137,40 @@ public class SimLeftRed_17 extends LinearOpMode {
         //                   leftDrive.getCurrentPosition(),
         //                   rightDrive.getCurrentPosition());
 
-        telemetry.addData("Front Left Position: %7d", frontLeft.getCurrentPosition());
-        telemetry.addData("Back Left Position: %7d", backLeft.getCurrentPosition());
-        telemetry.addData("Front Right Position: %7d", frontRight.getCurrentPosition());
-        telemetry.addData("Back Right Position: %7d", backRight.getCurrentPosition());
 
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        sleep(250);
+
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         // encoderDrive(DRIVE_SPEED,  48,  48, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
         // encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
         // encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
-
-        claw.setPosition(closeClaw);
+        claw.setPosition(CLAW_CLOSE_POSITION);
         sleep(1000);
-        encoderDrive(DRIVE_SPEED, 24, -24, -24, 24, 3.0); //values inverse
-        encoderDrive(DRIVE_SPEED, 36, 36, 36, 36, 4.0); //drive up to the large height, 48 
-        encoderDrive(TURN_SPEED, -ND, -ND, ND, ND, 3.0); //values inverse
-        
-        //medium 1
-        autoLift(LIFT_MEDIUM);  //medium pole
-        sleep(500); 
-        encoderDrive(DRIVE_SPEED, 3.5, 3.5, 3.5, 3.5, 2.0);
-        sleep(1000);
-        claw.setPosition(openClaw); //let go +4 points
+        lift.setTargetPosition(6800);
+        lift.setPower(1);
+        lift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
 
-        encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move backwards
+        while (lift.isBusy()){
+            telemetry.addData("Lift Position: %d", lift.getCurrentPosition());
+            telemetry.update();
+            sleep(10);
+        }
 
-
-        encoderDrive(DRIVE_SPEED, -36, 36, 36, -36, 4.0);
-        encoderDrive(DRIVE_SPEED, 48, 48, 48, 48, 3.0); // +2 points
-
+        telemetry.addData("Lift Position: %d", lift.getCurrentPosition());
         telemetry.addData("Path", "Complete");
         telemetry.update();
-        sleep(1000);  // pause to display final telemetry message.
+        sleep(10000);  // pause to display final telemetry message.
     }
 
     /*

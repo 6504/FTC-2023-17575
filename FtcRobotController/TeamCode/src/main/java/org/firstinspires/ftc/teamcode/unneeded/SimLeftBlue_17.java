@@ -65,8 +65,9 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: ComLeftBlue_17", group="Robot")
-public class ComLeftBlue_17 extends LinearOpMode {
+@Autonomous(name="Robot: SimLeftBlue_17", group="Robot")
+@Disabled()
+public class SimLeftBlue_17 extends LinearOpMode {
     
     /* Declare OpMode members. */
     private DcMotor frontLeft= null;
@@ -86,8 +87,6 @@ public class ComLeftBlue_17 extends LinearOpMode {
     private final int LIFT_MEDIUM = 6000; //TODO: find actual values
     private final int LIFT_HIGH = 7500; //TODO: find actual values
 
-
-
     private ElapsedTime     runtime = new ElapsedTime();
 
     // Calculate the COUNTS_PER_INCH for your specific drive train.
@@ -103,14 +102,14 @@ public class ComLeftBlue_17 extends LinearOpMode {
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 1;
     static final double     TURN_SPEED              = 1;
-     
+
     static final double ND = 14.15; //ninety degrees
 
-    static final double openClaw =0.35; 
-    static final double closeClaw =0.65;
-
-    static final double indConeHeight = 0; //TODO
-    static final double coneDiff = 0; //TODO
+    static final double openClaw =0.65; 
+    static final double closeClaw =0.25;
+    
+    static final double indConeHeight = 730; //TODO
+    static final double coneDiff = 400; //TODO
     private int conesTotal = 5;
     private int coneHeight = (int) (indConeHeight + (coneDiff * conesTotal));
 
@@ -124,6 +123,8 @@ public class ComLeftBlue_17 extends LinearOpMode {
         lift2.setPower(1.0);
         lift2.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
     }
+
+
 
         //2ft/sec
 
@@ -189,9 +190,7 @@ public class ComLeftBlue_17 extends LinearOpMode {
         // encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         claw.setPosition(closeClaw);
-        //autoLiftUP(1000);
-        //sleep(1000);
-
+        sleep(1000);
         encoderDrive(DRIVE_SPEED, 24, -24, -24, 24, 3.0); //values inverse
         encoderDrive(DRIVE_SPEED, 36, 36, 36, 36, 4.0); //drive up to the large height, 48 
         encoderDrive(TURN_SPEED, -ND, -ND, ND, ND, 3.0); //values inverse
@@ -199,55 +198,13 @@ public class ComLeftBlue_17 extends LinearOpMode {
         //medium 1
         autoLift(LIFT_MEDIUM);  //medium pole
         sleep(500); 
-        encoderDrive(DRIVE_SPEED, 3, 3, 3, 3, 2.0);
-        sleep(1000);
-        claw.setPosition(openClaw); //let go +4 points
-        encoderDrive(DRIVE_SPEED, -3, -3, -3, -3, 2.0);
-        autoLift(coneHeight);
-        conesTotal--;
-
-        encoderDrive(DRIVE_SPEED, 12, -12, -12, 12, 3.0); //values inverse
-        encoderDrive(DRIVE_SPEED, 50, 50, 50, 50, 8.0); //go toward cone stack
-        sleep(4000);
-        claw.setPosition(closeClaw); //get next cone
-        sleep(500);
-        autoLift(coneHeight*2);
-        sleep(1000);
-
-        //medium 2
-        encoderDrive(DRIVE_SPEED, -50, -50, -50, -50, 8.0);
-        encoderDrive(DRIVE_SPEED, -12, 12, 12, -12, 3.0);
-
-        encoderDrive(DRIVE_SPEED, 3, 3, 3, 3, 2.0);
+        encoderDrive(DRIVE_SPEED, 3.5, 3.5, 3.5, 3.5, 2.0);
         sleep(1000);
         claw.setPosition(openClaw); //let go +4 points
 
-        encoderDrive(DRIVE_SPEED, -3, -3, -3, -3, 2.0);
-        autoLift(coneHeight);
-        conesTotal--;
-
-        encoderDrive(DRIVE_SPEED, 12, -12, -12, 12, 3.0);
-        encoderDrive(DRIVE_SPEED, 50, 50, 50, 50, 8.0);
-        sleep(4000);
-        claw.setPosition(closeClaw); //get next cone
-        sleep(500);
-        autoLift(coneHeight*2);
-        sleep(1000);
-
-        //medium 3
-        encoderDrive(DRIVE_SPEED, -50, -50, -50, -50, 8.0);
-        encoderDrive(DRIVE_SPEED, 12, -12, -12, 12, 3.0);
-
-        encoderDrive(DRIVE_SPEED, 3, 3, 3, 3, 2.0);
-        sleep(1000);
-        claw.setPosition(openClaw); //let go +4 points
-
-        encoderDrive(DRIVE_SPEED, -3, -3, -3, -3, 2.0);
-        autoLift(coneHeight);
-        conesTotal--;
+        encoderDrive(DRIVE_SPEED, -3.5, -3.5, -3.5, -3.5, 1.0); //move backwards
 
 
-        //near end of match
         encoderDrive(DRIVE_SPEED, -36, 36, 36, -36, 4.0);
         encoderDrive(DRIVE_SPEED, -12, -12, -12, -12, 3.0); // +2 points
 

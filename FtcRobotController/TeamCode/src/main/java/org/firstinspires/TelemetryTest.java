@@ -52,9 +52,9 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Basic: Mecanum Drive", group="Linear Opmode")
+@TeleOp(name="Basic: TelemetryTest", group="Linear Opmode")
 
-public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
+public class TelemetryTest extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -282,11 +282,11 @@ public class Mecanum_BasicOpMode_Linear extends LinearOpMode {
 
 
             //telemetry.addData("Status", "Run Time: " + runtime.toString());
-            /*telemetry.addData("Claw", "Position: %.2f", claw.getPosition());
+            telemetry.addData("Claw", "Position: %.2f", claw.getPosition());
             telemetry.addData("Buttons", "A: %b, B: %b", buttonA, buttonB);
             telemetry.addData("Lift1", "Position1: %d, Power1: %.2f", lift1.getCurrentPosition(), lift1.getPower());
             telemetry.addData("Wheels" ,"Power: %.2f, Slow: %b", frontLeft.getPower(), slowMode);
-            *//*         
+            /*         
 
             telemetry.addData("LeftMotors", "frontLeft (%.2f), backLeft (%.2f)", frontLeftPower, backLeftPower);
             telemetry.addData("RightMotors", "frontRight (%.2f), backRight (%.2f)", frontRightPower, backRightPower);

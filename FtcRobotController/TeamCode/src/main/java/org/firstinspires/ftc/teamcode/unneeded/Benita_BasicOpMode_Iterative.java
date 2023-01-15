@@ -55,6 +55,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @TeleOp(name = "Basic: Benita OpMode", group = "Benita Opmode")
+@Disabled()
 public class Benita_BasicOpMode_Iterative extends OpMode {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
