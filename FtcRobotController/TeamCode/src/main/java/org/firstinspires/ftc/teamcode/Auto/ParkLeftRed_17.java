@@ -188,11 +188,11 @@ public class ParkLeftRed_17 extends LinearOpMode {
         // encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
         // encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
-        claw.setPosition(closeClaw);
+       // claw.setPosition(closeClaw);
         sleep(1000);
 
         encoderDrive(DRIVE_SPEED, -26, 26, 26, -26, 4.0); // +2 points
-        autoLift(LIFT_MEDIUM);
+      //  autoLift(LIFT_MEDIUM);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
